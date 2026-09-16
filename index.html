@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="유기화학 2학년을 위한 ¹H·¹³C NMR 구조 해석 연습. 화학적 등가성, 화학적 이동, 갈라짐, 적분과 IR 자료를 함께 학습합니다."><title>NMR Studio · 구조에서 스펙트럼까지</title><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230c1830'/%3E%3Cpath d='M4 24h7l2-15 2 15h3l2-20 2 20h6' fill='none' stroke='%235ee3ee' stroke-width='2'/%3E%3C/svg%3E"><style>
+:root{--ink:#17253e;--muted:#61718a;--navy:#0c1830;--blue:#2459d4;--cyan:#5ee3ee;--line:#dfe5ef;--bg:#f4f7fb;--paper:#fff;--success:#157957;--danger:#b83e3e;--violet:#7952bd;--radius:16px;font-family:Inter,'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;color:var(--ink);font-size:16px;background:var(--bg)}*{box-sizing:border-box}body{margin:0}button,select,input{font:inherit}button,a,select{touch-action:manipulation}button{cursor:pointer}button:disabled{cursor:default}a{color:var(--blue)}button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #32a6ce;outline-offset:3px}button{transition:background .15s,border-color .15s}h1,h2,h3,p{margin-top:0}h1{font-size:2rem;letter-spacing:-.05em;line-height:1.3;margin-bottom:12px}h2{font-size:1.3rem;line-height:1.6;letter-spacing:-.03em}h3{font-size:1.05rem;line-height:1.6}p{line-height:1.8}button{border:1px solid var(--line);border-radius:9px;padding:11px 17px;background:#fff;color:var(--ink)}button:hover{background:#edf3ff;border-color:#a8bdeb}.app-shell{display:flex;min-height:100vh}.sidebar{width:245px;flex-shrink:0;background:var(--navy);color:#fff;padding:35px 22px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}.brand{display:flex;align-items:center;gap:12px;color:white;text-decoration:none;font-size:1.25rem;letter-spacing:-.03em}.brand-mark{display:grid;place-items:center;background:var(--cyan);border-radius:11px;width:45px;height:45px;color:var(--navy);font-size:1.5rem;font-weight:750}.brand b{font-weight:400;color:#b8d5e5}.brand small{display:block;font-size:10px;letter-spacing:.14em;color:#8cacc6;margin-top:6px}.nav-label{font-size:12px;letter-spacing:.16em;color:#7290af;margin:46px 0 14px 12px}.sidebar-bottom{margin-top:auto;padding:30px 12px 0;border-top:1px solid #24334c}.sidebar-bottom span{display:block;color:var(--cyan);font-size:13px;margin-bottom:10px}.sidebar-bottom strong{font-size:14px}.sidebar-bottom p{font-size:14px;color:#8ea5bf;margin:12px 0 0}.workspace{flex:1;min-width:0}.topbar{height:76px;background:rgba(255,255,255,.86);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 40px;font-size:14px;color:var(--muted)}.topbar b{color:var(--ink);font-weight:600}.divider{margin:0 14px;color:#b5bfce}.text-button{font-size:14px;background:transparent;padding:8px 0;border:0;color:var(--muted)}main{max-width:1430px;margin:auto;padding:36px 40px 50px}.eyebrow{font-size:12px;letter-spacing:.15em;color:var(--blue);font-weight:700;margin-bottom:12px}.page-heading{display:flex;justify-content:space-between;gap:24px;align-items:center;margin-bottom:24px}.page-heading p:last-child{color:var(--muted);font-size:15px;margin-bottom:0}.question-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;min-width:0;box-shadow:0 3px 12px #152a4710}.question-heading{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);margin-bottom:18px}.badge{background:#eef3ff;color:var(--blue);padding:5px 9px;border-radius:6px;font-size:12px;font-weight:650}.molecule-placeholder{display:grid;place-items:center;min-height:230px;font-size:2.2rem;letter-spacing:.06em;background:#fafcff;border-radius:12px;margin:20px 0}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}footer{border-top:1px solid var(--line);margin:0 40px;padding:20px 0;font-size:12px;color:var(--muted);display:flex;justify-content:space-between}dialog{width:min(740px,92vw);border:1px solid var(--line);border-radius:18px;color:var(--ink);padding:28px;max-height:85vh}dialog::backdrop{background:#06142888}.dialog-heading{display:flex;justify-content:space-between;gap:20px}.dialog-heading button{padding:0;width:36px;height:36px;font-size:24px}.skip{position:fixed;left:12px;top:-60px;z-index:10;background:white;padding:10px}.skip:focus{top:12px}
+.brand small{font-size:12px;letter-spacing:.06em}.nav-item{width:100%;border:0;display:flex;align-items:center;gap:12px;text-align:left;color:#a6b9cf;background:transparent;padding:14px 12px;border-radius:9px;font-size:14px;line-height:1.6;margin-bottom:7px;white-space:normal}.nav-number{font-size:12px;color:#7088a4;min-width:18px}.nav-item:hover{background:#172844;color:white}.nav-item.active{background:#213655;color:#fff;box-shadow:inset 3px 0 0 var(--cyan)}.nav-item.active .nav-number{color:var(--cyan)}.module-count{border-left:1px solid #d7dfeb;padding-left:23px;min-width:116px;text-align:right}.module-count strong{font-family:Georgia,serif;font-size:2.5rem;line-height:1.15;font-weight:400;color:#22416a}.module-count span{display:block;font-size:12px;color:var(--muted);margin-top:4px}.learning-layout{display:grid;grid-template-columns:minmax(0,1fr) 276px;gap:25px;align-items:start}.primary-column{min-width:0}.learning-aside{min-width:0}.concept-card{border:1px solid var(--line);background:#fff;border-radius:14px;padding:23px 21px}.concept-card .eyebrow{font-size:12px;letter-spacing:.1em}.concept-card h3{margin-bottom:24px}.tip{display:flex;gap:12px;margin-bottom:23px}.tip:last-child{margin-bottom:0}.tip>span{font-family:Georgia,serif;color:#2b6098;font-size:16px;min-width:25px;line-height:1.6}.tip h4{font-size:14px;margin:0 0 7px;line-height:1.6;letter-spacing:-.02em}.tip p{font-size:14px;color:var(--muted);margin:0;line-height:1.75;word-break:keep-all;overflow-wrap:anywhere}.note-card{margin-top:17px;padding:22px;background:#e8f0ff;border:1px solid #d7e4fb;border-radius:13px}.note-symbol{display:block;font-size:27px;color:#416dc3;line-height:1;margin-bottom:13px}.note-card h3{font-size:14px;margin-bottom:10px}.note-card p{font-size:14px;color:#536a8c;margin:0;line-height:1.75;word-break:keep-all;overflow-wrap:anywhere}.session-card{padding:24px 4px 0;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}.session-card>span{font-size:14px;color:var(--muted)}.session-card strong{font-size:24px;font-weight:650}.session-card small{font-size:14px;font-weight:400;color:var(--muted)}.session-card p{width:100%;font-size:12px;color:#7f8a9d;line-height:1.5;margin:0}.problem-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px;font-size:14px;color:var(--muted)}.problem-toolbar label{display:flex;align-items:center;gap:10px;min-width:0}.problem-toolbar>div{display:flex;gap:7px}.problem-toolbar select{max-width:270px}.icon-button{padding:8px 11px;font-size:14px;min-height:37px;background:transparent}.icon-button:disabled{opacity:.35}.icon-button span{margin-left:4px}select{border:1px solid #d6deea;background:white;border-radius:7px;padding:8px 28px 8px 10px;color:var(--ink);font-size:14px;max-width:100%}.question-prompt{font-size:14px;line-height:1.8;color:var(--muted);margin-bottom:20px;word-break:keep-all;overflow-wrap:anywhere}.question-number{font-weight:500;margin-left:10px;color:#8b98ab}.question-card>h2{margin-bottom:8px}.molecule{margin:18px 0 20px;background:#f9fbfe;border:1px solid #edf1f7;border-radius:12px;padding:16px 10px 12px;min-width:0;overflow:hidden}.molecule svg{display:block;width:100%;height:220px;max-height:230px}.molecule figcaption{text-align:center;font-size:14px;line-height:1.6;color:#49617d;margin-top:6px}.molecule figcaption>span{margin-left:10px;color:#8796a8;font-size:13px}.molecule.compact{padding:10px 5px;margin:8px 0}.molecule.compact svg{height:140px}.target-caption{font-size:14px;color:#536988;display:flex;align-items:center;gap:7px;justify-content:center;margin-top:-10px}.target-key{width:12px;height:12px;border-radius:3px;background:#eaf0ff;border:1px solid #2459d4}.answer-fieldset{border:0;padding:0;margin:24px 0 0;min-width:0}.answer-fieldset legend{font-size:14px;color:var(--muted);margin-bottom:12px}.choice{display:flex;align-items:center;text-align:left;gap:12px;padding:15px;min-height:62px;position:relative;background:#fff;line-height:1.6}.choice-letter{display:grid;place-items:center;border:1px solid #dfe5ef;border-radius:6px;flex-shrink:0;width:28px;height:28px;font-size:13px;font-weight:650;color:#7a8da8}.choice.selected{border:1.5px solid var(--blue);background:#f0f5ff;box-shadow:0 0 0 1px #2459d411}.choice.selected .choice-letter{background:var(--blue);border-color:var(--blue);color:white}.choice.correct{border-color:#24986f;background:#f0faf5;color:#176848}.choice.correct .choice-letter{background:#197651;color:white;border-color:#197651}.choice.incorrect{border-color:#cf7d78;background:#fff5f4}.choice:disabled{opacity:1}.choice-state{margin-left:auto;font-size:12px;white-space:nowrap;color:#157957}.answer-actions{display:flex;justify-content:space-between;align-items:center;margin-top:23px;gap:16px}.primary-button{background:var(--blue);color:white;border-color:var(--blue);font-size:14px;font-weight:650;padding:12px 19px}.primary-button:hover{background:#1849bc;color:white;border-color:#1849bc}.primary-button:disabled{background:#dfe6f0;border-color:#dfe6f0;color:#8493a8}.primary-button span{margin-left:17px}.hint-box{font-size:14px;color:#776238;padding:15px 18px;background:#fff8e9;border:1px solid #efe1bd;border-radius:9px;margin:18px 0 0}.feedback{margin-top:24px;border-top:1px solid var(--line);padding-top:24px}.feedback-title{display:flex;gap:13px;align-items:flex-start}.feedback-title>span{display:grid;place-items:center;font-size:18px;width:36px;height:36px;background:#e3f3eb;color:#157957;border-radius:50%;flex-shrink:0}.is-incorrect .feedback-title>span{background:#fff0e4;color:#b06422}.feedback-title strong{font-size:16px;color:#196d50}.is-incorrect .feedback-title strong{color:#a75f27}.feedback-title p{font-size:14px;color:var(--muted);margin:4px 0 0}.main-explanation{line-height:1.9;font-size:16px;margin:20px 0;color:#2a415f;word-break:keep-all;overflow-wrap:anywhere}.review-actions{display:flex;justify-content:space-between;border-top:1px dashed var(--line);padding-top:20px;margin-top:23px;gap:12px}.review-actions>button{font-size:14px}.equivalence-legend{border-radius:9px;background:#f5f8fd;padding:15px 18px;font-size:14px}.equivalence-legend p{font-size:14px;margin:8px 0 0;color:var(--muted)}.view-tabs{display:flex;gap:8px;border-bottom:1px solid var(--line);margin:-2px 0 25px;padding-bottom:13px}.view-tabs button{font-size:14px;background:transparent;border-color:transparent;border-radius:6px}.view-tabs button.active{color:#2459d4;background:#e6eeff;font-weight:650}.comparison-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:24px 0}.comparison-molecule{border:1px solid var(--line);border-radius:13px;padding:15px 12px;background:#f9fbfe;min-width:0}.comparison-molecule .molecule{border:0;background:none;margin-bottom:0}.comparison-molecule .molecule.compact svg{height:180px}.pair-label{font-size:19px;font-weight:650;color:var(--blue)}.pair-label span{font-size:14px;margin-left:9px;color:var(--muted);font-weight:400}.pair-delta{display:block;text-align:center;font-family:Georgia,serif;font-size:25px;color:#2459d4}.pair-delta small{font:14px Arial,sans-serif}.comparison-molecule:nth-child(2) .pair-label{color:#8150ba}.spectrum-panel{margin:25px 0 20px;background:white}.spectrum-toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:13px;flex-wrap:wrap}.instrument{font-size:15px;font-weight:700;letter-spacing:.02em}.instrument small{font-size:12px;font-weight:400;color:var(--muted);margin-left:10px}.integral-toggle{font-size:13px;display:flex;align-items:center;gap:5px;color:#977129}.integral-toggle input{accent-color:#b88831;width:15px;height:15px}.spectrum-svg{display:block;width:100%;height:auto;min-height:180px}.plot-bottom{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px;margin:7px 0 20px;gap:12px}.plot-bottom label{display:flex;align-items:center;gap:8px}.plot-bottom select{font-size:13px;padding-top:6px;padding-bottom:6px}.quiet{color:#bbc5d1;padding:0 6px}.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:9px}table{width:100%;border-collapse:collapse;font-size:14px;text-align:left;line-height:1.65}th{font-weight:600;color:#526680;background:#f5f8fc;font-size:13px}th,td{padding:10px 13px;border-bottom:1px solid #e9edf4}tbody tr:last-child td{border-bottom:0}.numeric{font-variant-numeric:tabular-nums}abbr{cursor:help;text-decoration:none}td b{font-size:12px}.data-note{font-size:12px;color:#7b899d;line-height:1.75;margin:13px 0 0}.structure-choices{gap:14px}.structure-choices .choice{display:block;padding:10px;border-radius:11px}.structure-choices .choice-letter{position:absolute;top:12px;left:12px;z-index:1}.structure-choice{display:block;width:100%;padding-top:15px}.structure-choice .molecule{border:0;background:transparent;margin:0;padding:0}.structure-choice .molecule svg{height:143px}.structure-choice figcaption{font-size:14px;margin:4px 0}.structure-choice figcaption span{display:block;margin-left:0;font-size:12px}.structure-choices .choice-state{position:absolute;right:12px;top:12px}.explanation-steps{display:grid;grid-template-columns:1fr 1fr;gap:13px}.explanation-steps>div{padding:17px;border:1px solid #e1e8f2;background:#f8fafd;border-radius:10px}.explanation-steps span{font-size:12px;color:#7890b1;float:left;margin-right:8px;line-height:24px}.explanation-steps h4{font-size:14px;margin:0 0 9px}.explanation-steps p{font-size:14px;line-height:1.8;color:#526984;margin:0;word-break:keep-all;overflow-wrap:anywhere}.elimination{margin-top:19px;border-left:3px solid #bac9df;padding-left:17px}.elimination h4{font-size:14px;margin:0 0 8px}.elimination p{font-size:14px;color:var(--muted);margin:0}.assigned-structure{margin-top:19px;font-size:14px}.assigned-structure summary{cursor:pointer;color:var(--blue);padding:10px 0}.clue-grid{display:grid;grid-template-columns:170px minmax(0,1fr);gap:15px;margin:24px 0}.formula-card{border:1px solid #d9e3f4;border-radius:11px;background:#eef3fc;padding:20px}.formula-card>span{font-size:13px;color:#617898;display:block}.formula-card>strong{font-size:23px;display:block;margin:10px 0 23px;letter-spacing:.04em}.formula-card>label{font-size:12px;color:#617898;display:block}.formula-card small{display:block;font-size:12px;color:#617898;margin-top:8px}.ir-card{border:1px solid var(--line);border-radius:11px;padding:16px 12px;overflow-x:auto}.small-heading{font-size:13px;color:#496580;font-weight:600}.ir-card table{font-size:13px;margin-top:12px}.ir-card th,.ir-card td{padding:8px}.coupling-chips{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px 0;font-size:14px;color:#566a87}.coupling-chips span{background:#edf3fd;border-radius:6px;padding:8px 12px}.coupling-chips b{color:var(--blue)}.stick-result{background:#f8fbff;border:1px solid #e3eaf7;border-radius:12px;padding:20px 10px 12px;margin-top:24px}.result-metrics{display:flex;gap:20px;justify-content:center;font-size:14px;color:#627693;flex-wrap:wrap}.result-metrics span{display:flex;align-items:center;gap:9px}.result-metrics b{font-size:22px;color:var(--blue)}.result-metrics strong{font-size:14px;color:#2459d4;overflow-wrap:anywhere}.stick-result svg{display:block;width:100%;max-height:255px;margin-top:12px}.splitting-answer>button{margin-top:15px;font-size:14px;color:var(--blue)}.lab-presets{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}.lab-presets button{font-size:13px;padding:9px 11px;color:#315b99}.lab-controls{display:grid;grid-template-columns:1fr 1fr;gap:16px}.neighbor-card{border:1px solid var(--line);border-radius:10px;padding:18px}.neighbor-name{display:block;color:var(--blue);font-size:16px;font-weight:650;margin-bottom:19px}.neighbor-card label{display:block;font-size:14px;color:var(--muted);margin-top:16px}.neighbor-card label:first-of-type{display:flex;align-items:center;justify-content:space-between}.neighbor-card select{width:80px}.neighbor-card input[type=range]{display:block;width:100%;accent-color:var(--blue);margin:14px 0 6px}.neighbor-card output{font-weight:600;color:var(--ink);margin-left:7px}.principle-box{border-left:3px solid var(--blue);padding:5px 0 5px 17px;margin:23px 0 0;font-size:14px;color:#566b87}.reference-card{background:white;border:1px solid var(--line);border-radius:16px;padding:26px;min-width:0}.reference-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}.reference-top>span:last-child{font-size:13px;color:var(--muted)}.reference-intro{font-size:14px;color:var(--muted)}.range-axis{display:flex;justify-content:space-between;margin:20px 84px 10px 171px;gap:12px;font-size:12px;color:#8292aa}.range-map{border-top:1px solid var(--line)}.range-row{display:grid;grid-template-columns:165px minmax(80px,1fr) 80px;gap:10px;align-items:center;text-align:left;padding:11px 6px;width:100%;border:0;border-bottom:1px solid #eaf0f7;border-radius:0;background:white}.range-name{font-size:14px;line-height:1.6;letter-spacing:-.02em}.range-row:hover,.range-row.active{background:#f0f5ff}.range-row.active .range-name{color:var(--blue);font-weight:650}.range-track{height:19px;background:repeating-linear-gradient(to right,transparent,transparent calc(20% - 1px),#edf1f7 calc(20% - 1px),#edf1f7 20%);position:relative}.range-band{position:absolute;display:block;height:9px;top:5px;border-radius:2px;background:#86b2e7}.range-row.active .range-band{background:var(--blue);height:13px;top:3px}.range-value{font-size:13px;text-align:right;color:#617898;font-variant-numeric:tabular-nums}.range-detail{display:grid;grid-template-columns:1fr 1fr;gap:20px;border-top:1px solid var(--line);margin-top:25px;padding-top:25px}.range-detail h2{font-size:18px;margin-bottom:9px}.range-detail p{font-size:14px;color:var(--muted);margin-bottom:8px}.range-detail .eyebrow{font-size:12px;color:var(--blue)}.range-big{font-family:Georgia,serif;font-size:31px;color:var(--blue);margin-bottom:12px}.range-big small{font:14px Arial,sans-serif;color:var(--muted)}.range-detail .fragment{font-family:Arial,sans-serif;color:#354968;font-size:16px}.range-detail .molecule{align-self:center}.carbon-example{margin-top:24px}.section-title{display:flex;justify-content:space-between;align-items:center;gap:20px}.section-title h2{margin:0}.carbon-summary{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;margin-top:20px}.carbon-summary p{font-size:14px;color:var(--muted);margin-top:14px}.source-item{padding:17px 0;border-bottom:1px solid var(--line)}.source-item a{font-size:15px;line-height:1.7;text-decoration:none}.source-item a:hover{text-decoration:underline}.source-item p{font-size:13px;margin:6px 0 0;color:var(--muted)}.source-assumptions{padding:19px;background:#f4f7fb;border-radius:10px}.source-assumptions h3{font-size:16px}.source-assumptions ul{padding-left:20px;margin-bottom:0}.source-assumptions li{font-size:14px;line-height:1.8;margin-bottom:10px}#sources-content>p:first-child{font-size:15px;color:var(--muted)}.dialog-heading h2{padding-right:15px}
+@media(min-width:1600px){main{padding-top:45px}.question-card{padding:32px}.molecule svg{height:245px;max-height:245px}}
+@media(max-width:1230px){.sidebar{width:216px;padding:30px 15px}.brand{font-size:18px;gap:9px}.brand small{font-size:10px}.brand-mark{width:39px;height:39px}.topbar{padding:0 27px}main{padding:30px 27px 45px}.learning-layout{grid-template-columns:minmax(0,1fr) 238px;gap:19px}.concept-card{padding:20px 17px}.question-card{padding:23px}.range-row{grid-template-columns:135px minmax(60px,1fr) 68px;gap:6px}.range-name{font-size:13px}.range-axis{margin-left:143px;margin-right:70px}.problem-toolbar select{max-width:200px}.note-card{padding:20px 17px}h1{font-size:1.8rem}.nav-item{padding-left:9px;padding-right:5px;font-size:13px}}
+@media(max-width:1040px){.learning-layout{grid-template-columns:minmax(0,1fr)}.learning-aside{display:grid;grid-template-columns:1.2fr 1fr;gap:20px}.note-card{margin:0}.session-card{grid-column:1/-1;padding-top:0}.tip{margin-bottom:16px}.sidebar{width:220px}.question-card{padding:27px}.sidebar-bottom{padding-top:22px}.range-row{grid-template-columns:165px minmax(80px,1fr) 80px}.range-axis{margin-left:175px;margin-right:86px}.range-name{font-size:14px}}
+@media(max-width:760px){.app-shell{display:block}.sidebar{width:100%;height:auto;position:static;padding:20px 20px 13px;display:block}.brand{font-size:20px}.brand small{font-size:10px}.nav-label,.sidebar-bottom{display:none}#module-nav{display:flex;overflow-x:auto;gap:8px;padding-top:20px;padding-bottom:5px;scrollbar-width:thin;scrollbar-color:#42617e transparent}.nav-item{width:auto;flex-shrink:0;white-space:nowrap;gap:7px;padding:9px 12px;margin:0;font-size:14px}.nav-item.active{box-shadow:inset 0 -2px 0 var(--cyan)}.nav-number{font-size:12px}.topbar{height:58px;padding:0 21px;gap:15px;font-size:12px}.divider{margin:0 6px}.topbar .text-button{font-size:12px;white-space:nowrap}main{padding:28px 20px 38px}.page-heading{gap:15px;margin-bottom:23px}.page-heading h1{font-size:1.7rem}.page-heading p:last-child{font-size:14px}.module-count{min-width:76px;padding-left:12px}.module-count strong{font-size:2.1rem}.module-count span{font-size:12px}.learning-aside{grid-template-columns:1fr 1fr}.learning-layout{gap:22px}.question-card{padding:22px}.question-card h2{font-size:1.18rem}.molecule svg{height:215px}.molecule.compact svg{height:130px}.molecule figcaption span{font-size:12px}.problem-toolbar select{max-width:235px}.problem-toolbar>div{gap:4px}.icon-button{padding:7px 9px}.problem-toolbar .icon-button span{display:none}.question-prompt{font-size:14px}.range-detail{gap:14px}.range-detail .molecule svg{height:170px}.reference-card{padding:22px}.instrument small{display:block;margin:4px 0 0}.spectrum-svg{min-height:170px}.plot-bottom{font-size:12px}.comparison-molecule .molecule.compact svg{height:170px}.clue-grid{grid-template-columns:135px 1fr;gap:10px}.formula-card{padding:15px}.formula-card>strong{font-size:20px}.formula-card>label{font-size:12px}.ir-card{padding:12px 9px}.ir-card td{font-size:12px}.section-title{gap:10px}footer{margin:0 20px;gap:15px;font-size:12px}}
+@media(max-width:480px){.page-heading h1{font-size:1.5rem;letter-spacing:-.04em}.eyebrow{font-size:11px;letter-spacing:.1em}.page-heading .module-count{display:none}.question-card{padding:19px 15px}.learning-aside{grid-template-columns:1fr}.learning-aside .note-card{display:none}.question-card>h2{font-size:1.12rem}.choices{gap:9px}.choice{font-size:14px;padding:12px;gap:9px;min-height:60px}.choice-letter{width:24px;height:24px;font-size:12px}.problem-toolbar{font-size:13px}.problem-toolbar select{max-width:194px;font-size:13px}.question-heading{font-size:12px;gap:9px}.question-number{margin-left:5px}.molecule svg{height:190px}.molecule.compact svg{height:120px}.comparison-grid{gap:9px}.comparison-molecule{padding:12px 6px}.comparison-molecule .molecule.compact svg{height:135px}.comparison-molecule figcaption{font-size:12px}.comparison-molecule figcaption span{display:block;margin-left:0}.pair-label{padding:0 6px;font-size:17px}.pair-label span{font-size:12px;margin-left:5px}.target-caption{font-size:13px}.molecule figcaption{font-size:13px}.structure-choice .molecule svg{height:115px}.structure-choice figcaption{font-size:12px}.structure-choices .choice{padding:7px}.structure-choices .choice-letter{top:9px;left:9px}.answer-fieldset legend{font-size:13px}.explanation-steps{grid-template-columns:1fr}.clue-grid{grid-template-columns:1fr}.formula-card{display:grid;grid-template-columns:1fr 100px;column-gap:15px;align-items:center}.formula-card>span{grid-column:1;grid-row:1}.formula-card>strong{grid-column:1;grid-row:2;margin:7px 0 0;font-size:23px}.formula-card>label{grid-column:2;grid-row:1}.formula-card>small{grid-column:1/-1}.signal-table th,.signal-table td{padding:8px 9px;font-size:12px}.spectrum-toolbar{gap:10px}.instrument{font-size:14px}.integral-toggle{font-size:12px}.spectrum-svg{min-height:150px}.plot-bottom{flex-wrap:wrap}.main-explanation{font-size:15px}.lab-controls{gap:10px}.neighbor-card{padding:14px}.neighbor-card label{font-size:13px}.neighbor-card select{width:65px;padding-right:15px}.lab-presets button{font-size:12px;padding:8px}.result-metrics{gap:12px;font-size:13px}.result-metrics strong{font-size:12px}.result-metrics span{flex-wrap:wrap;justify-content:center}.reference-card{padding:20px 13px}.range-row{grid-template-columns:123px minmax(45px,1fr) 61px;gap:5px;padding:11px 4px}.range-name{font-size:12px}.range-value{font-size:12px}.range-axis{margin-left:129px;margin-right:67px;font-size:10px}.range-detail{grid-template-columns:1fr}.range-detail .molecule{margin-top:0}.range-detail .molecule svg{height:140px}.reference-top{gap:8px}.reference-top>span:last-child{font-size:12px}.carbon-summary{grid-template-columns:1fr;gap:5px}.carbon-summary .molecule{margin-bottom:10px}.section-title{flex-wrap:wrap}.carbon-summary p{margin-bottom:5px}footer{font-size:11px;flex-wrap:wrap;line-height:1.6}.source-item a{font-size:14px}.dialog-heading h2{font-size:19px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+.brand small{font-size:12px}.range-name,.range-value{font-size:14px}.structure-choice figcaption,.comparison-molecule figcaption{font-size:14px}
+.problem-toolbar select{min-width:0}.problem-toolbar label{flex:1}
+@media(max-width:600px){.structure-choices{grid-template-columns:1fr}.structure-choice .molecule svg{height:175px}.structure-choice figcaption span{display:inline;margin-left:10px}}
+@media(max-width:480px){.signal-table th,.signal-table td{font-size:14px}.range-row{grid-template-columns:122px minmax(40px,1fr) 68px}.range-name,.range-value{font-size:14px}.comparison-grid{grid-template-columns:1fr}.comparison-molecule .molecule.compact svg{height:165px}.comparison-molecule figcaption span{display:inline;margin-left:10px}.range-axis{font-size:12px;margin-left:129px;margin-right:68px;line-height:1.6}}
+.proton-reference{padding:24px}.proton-reference h2{margin:18px 0 8px}.proton-reference .reference-intro,.proton-example .reference-intro{margin:10px 0 18px}
+.proton-range-scroll{max-height:390px;overflow:auto;scrollbar-width:thin;scrollbar-gutter:stable}.proton-range-table{border-collapse:separate;border-spacing:0;width:100%;font-size:14px}.proton-range-table thead th{position:sticky;top:0;background:#edf3fc;z-index:1;border-bottom:1px solid #d4e0f3;color:#425d81;font-weight:650;text-align:left;padding:11px 10px;white-space:nowrap}
+.proton-range-table tbody th,.proton-range-table td{padding:10px;border-bottom:1px solid #e8eef6;text-align:left;line-height:1.6}.proton-range-table tbody th{padding:0;font-weight:500;width:43%}.proton-range-table td:last-child{white-space:nowrap}.proton-range-table td:nth-child(2){font-size:13px;color:#5b6e88}
+.proton-range-table button{border:0;border-radius:0;background:transparent;text-align:left;width:100%;font-size:14px;line-height:1.65;padding:12px 10px}.proton-range-table button:focus-visible{outline-offset:-3px}.proton-range-table .active{background:#eaf1ff}.proton-range-table .active button{color:var(--blue);font-weight:700;box-shadow:inset 3px 0 var(--blue)}.proton-range-table button:hover{background:#eaf1ff}
+.proton-range-detail{margin-top:22px;border-top:1px solid var(--line);padding-top:20px}.proton-range-detail .eyebrow{margin:0 0 8px;font-size:12px;letter-spacing:.06em}.proton-range-detail h3{font-size:16px;margin:0 0 8px}.proton-range-detail h3 span{display:block;color:var(--blue);font-size:19px;font-variant-numeric:tabular-nums;margin-top:5px}.proton-range-detail p{font-size:14px;color:var(--muted);margin-bottom:8px}.proton-range-detail .molecule svg{height:145px}
+.proton-example{margin-top:22px;padding:24px}.proton-example .section-title{flex-wrap:wrap;gap:10px}.proton-example .section-title h2{font-size:1.2rem}.proton-site-select{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:14px;color:var(--muted)}.proton-site-select select{flex:1;min-width:190px}.proton-example .molecule svg{height:165px}.proton-assignment{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin:16px 0 10px;font-size:14px;color:var(--blue)}.proton-assignment span{color:#516986}.example-note{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:0}.proton-example .signal-table{font-size:14px;min-width:370px}
+/* Domain zoom controls are shared by spectra and first-order splitting diagrams. */
+.peak-viewer{min-width:0}.peak-viewer .spectrum-toolbar{margin-bottom:14px}.expand-plot{font-size:13px;padding:8px 11px;color:var(--blue);background:#eef4ff;border-color:#d4e1fa;white-space:nowrap;min-height:38px}
+.peak-picks{margin:0 0 14px;border-radius:10px;padding:12px;background:#f4f7fc}.peak-picks>span{display:block;font-size:12px;color:#536b8b;font-weight:650;margin-bottom:8px}.peak-picks>div{display:flex;flex-wrap:wrap;gap:7px}.peak-picks button{font-size:15px;font-variant-numeric:tabular-nums;padding:8px 11px;min-height:40px;color:#24446e}.peak-picks small{font-size:12px;color:#70829b;margin-left:5px}.peak-picks button[aria-pressed=true]{background:#2459d4;color:#fff;border-color:#2459d4}.peak-picks button[aria-pressed=true] small{color:#dbe7ff}
+.zoom-controls{display:flex;flex-wrap:wrap;gap:6px;margin:13px 0}.zoom-controls button{font-size:13px;min-height:39px;padding:8px 12px}.zoom-controls button:disabled{opacity:.4}.zoom-controls button:first-child{color:#2459d4;background:#f1f5ff;border-color:#cbdcfa}.plot-window{font-size:12px;margin:0;line-height:1.6;font-variant-numeric:tabular-nums;color:#60718b}.plot-window b{font-weight:600;color:#2459d4}.plot-help{font-size:12px;line-height:1.75;color:var(--muted);margin:9px 0 15px}.peak-viewer .plot-bottom{gap:8px;flex-wrap:wrap}.peak-viewer .integral-toggle{font-size:13px;white-space:nowrap}.peak-viewer .spectrum-chart{overflow-x:auto;overscroll-behavior-x:contain;border:1px solid #e5ecf5;border-radius:8px;background:white}.peak-viewer .spectrum-chart svg{display:block;width:100%;min-width:480px;height:auto;min-height:0;margin:0;max-height:none}
+.stick-result{padding:18px 14px 4px}.stick-result .result-metrics{justify-content:flex-start;gap:14px;padding:0 0 18px;margin-bottom:16px;border-bottom:1px solid var(--line);flex-wrap:wrap}.stick-result .result-metrics strong{overflow-wrap:anywhere}.stick-result .spectrum-chart svg{min-width:450px}.splitting-answer>button{margin-top:14px;font-size:14px}
+#peak-dialog{width:min(1240px,96vw);max-width:none;max-height:94dvh;padding:28px;border:1px solid #d6e1f0}#peak-dialog .dialog-heading{align-items:flex-start;margin-bottom:15px}#peak-dialog .dialog-heading h2{margin:0}#peak-dialog .eyebrow{margin-bottom:6px}#peak-close{flex-shrink:0;min-width:40px;min-height:40px}#peak-dialog .spectrum-chart{overflow-x:auto;border:1px solid #e5ecf5;border-radius:10px;background:#fff}#peak-dialog .spectrum-chart svg{display:block;width:100%;min-width:780px;height:auto;min-height:0;max-height:none;margin:0}#peak-dialog .plot-bottom{flex-wrap:wrap;gap:12px}#peak-dialog .plot-help{margin-bottom:0}#peak-dialog .zoom-controls button{min-height:43px;padding:10px 16px}#peak-dialog .peak-picks{padding:14px}#peak-dialog .spectrum-toolbar{margin-bottom:12px}
+@media(max-width:1179px){.proton-example{margin-top:0}.proton-range-scroll{max-height:none}.proton-range-detail{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:center}.proton-range-detail .molecule{margin:0}.proton-range-table tbody th{width:40%}}
+
+@media(max-width:600px){.proton-reference,.proton-example{padding:20px 15px}.proton-range-detail{grid-template-columns:1fr;gap:8px}.proton-range-table thead th,.proton-range-table td{padding:10px 7px}.proton-range-table button{padding:11px 8px}.proton-range-table tbody th{width:42%}.proton-range-table td:nth-child(2){font-size:12px}.proton-range-table td:last-child{font-size:13px}.proton-range-detail .molecule svg{height:150px}.proton-range-scroll{scrollbar-gutter:auto}.zoom-controls{gap:5px}.zoom-controls button{padding:8px 10px;font-size:13px}.stick-result{padding:15px 9px 4px}.peak-picks button{padding:7px 9px}.peak-viewer .spectrum-toolbar{gap:8px}.peak-viewer .plot-bottom{align-items:flex-start;flex-direction:column}#peak-dialog{padding:20px 14px}#peak-dialog .zoom-controls button{padding:9px 10px}#peak-dialog .dialog-heading h2{font-size:18px}.proton-example .signal-table td,.proton-example .signal-table th{padding:8px}}
+.plot-scroll-hint{display:none}@media(max-width:900px){.plot-scroll-hint{display:inline}}
+
+/* Reference first, followed by practice: both remain visible as icon menus. */
+.shift-menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:0 0 28px}
+.shift-menu-button{display:flex;align-items:center;gap:18px;min-width:0;min-height:104px;padding:20px 24px;border:2px solid var(--line);border-radius:16px;text-align:left;background:#fff}
+.shift-menu-button:hover{border-color:#a1b8e8;background:#f8faff}
+.shift-menu-button.active{border-color:var(--blue);background:#edf3ff;box-shadow:0 3px 12px #2459d40b}
+.shift-menu-icon{display:grid;place-items:center;flex:0 0 56px;width:56px;height:56px;border-radius:14px;background:#eef2f8;color:#4a627f}
+.shift-menu-icon svg{width:32px;height:32px}
+.shift-menu-button.active .shift-menu-icon{color:#fff;background:var(--blue)}
+.shift-menu-copy{display:flex;flex-direction:column;gap:6px;min-width:0}
+.shift-menu-copy strong{font-size:1.125rem;line-height:1.5;word-break:keep-all;overflow-wrap:anywhere}
+.shift-menu-copy>span{font-size:.875rem;line-height:1.6;color:#536781;word-break:keep-all;overflow-wrap:anywhere}
+.shift-menu-button.active .shift-menu-copy strong{color:#1748b5}
+.shift-menu-button:focus-visible{outline:3px solid #116db6;outline-offset:4px}
+.shift-reference-view{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;align-items:start}
+.shift-reference-view>.proton-example{margin-top:0}
+.shift-reference-view .proton-range-scroll{max-height:none;scrollbar-gutter:auto;overscroll-behavior-x:contain}
+.proton-reference .reference-intro{font-size:1rem;line-height:1.8}
+.proton-reference .reference-top>span:last-child{font-size:.875rem}
+.proton-table-hint{display:none;font-size:.875rem;line-height:1.7;color:#536781;margin:0 0 10px}
+.proton-range-table{min-width:660px;table-layout:fixed;font-size:.875rem}
+.proton-range-table thead th{padding:13px 12px;font-size:.875rem;z-index:2}
+.proton-range-table thead th:first-child{width:25%;left:0;z-index:3}
+.proton-range-table thead th:nth-child(2){width:21%}
+.proton-range-table thead th:nth-child(3){width:39%}
+.proton-range-table thead th:last-child{width:15%;text-align:right}
+.proton-range-table tbody th{position:sticky;left:0;z-index:1;width:auto;background:#fff}
+.proton-range-table tbody tr.active th{background:#eaf1ff}
+.proton-range-table tbody th,.proton-range-table tbody td{padding:0 12px;font-size:.875rem;line-height:1.65}
+.proton-range-table tbody th{padding:0}
+.proton-range-table button{padding:11px 12px;font-size:.875rem;min-height:46px}
+.proton-range-table td.proton-fragment{font-size:.875rem;color:#425876}
+.proton-range-table td:last-child{text-align:right;font-size:.875rem;color:#274978;white-space:nowrap}
+.proton-range-table .proton-map-column{padding-left:18px;padding-right:18px}
+.proton-map-direction{display:flex;justify-content:space-between;gap:12px;font-size:.75rem;line-height:1.5;color:#536781;font-weight:500}
+.proton-map-axis{position:relative;margin-top:7px;height:20px;border-top:1px solid #bacce6;font-size:.75rem;font-weight:500;font-variant-numeric:tabular-nums}
+.proton-map-axis>span{position:absolute;top:2px;transform:translateX(-50%)}
+.proton-map-axis>span:first-child{transform:none}
+.proton-map-axis>span:last-child{transform:translateX(-100%)}
+.proton-map-track{display:block;position:relative;height:24px;border-left:1px solid #dbe5f3;border-right:1px solid #dbe5f3;background:repeating-linear-gradient(to right,transparent,transparent calc(7.69230769% - 1px),#e1e9f5 calc(7.69230769% - 1px),#e1e9f5 7.69230769%)}
+.proton-map-band{position:absolute;top:6px;height:12px;border-radius:3px;background:#749bd3}
+.proton-range-table .active .proton-map-band{background:var(--blue);box-shadow:0 0 0 1px #1748b5}
+.proton-range-detail{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;align-items:center}
+.proton-range-detail .molecule{margin:0}
+.proton-range-detail p{font-size:1rem;line-height:1.8}
+.proton-range-detail .eyebrow{font-size:.75rem}
+.proton-example .spectrum-chart svg{min-width:480px}
+@media(max-width:1000px){.proton-table-hint{display:block}}
+@media(max-width:600px){
+ .shift-menu{gap:10px;margin-bottom:22px}
+ .shift-menu-button{flex-direction:column;align-items:flex-start;gap:10px;padding:16px 13px;min-height:0}
+ .shift-menu-icon{flex-basis:46px;width:46px;height:46px;border-radius:12px}
+ .shift-menu-icon svg{width:28px;height:28px}
+ .shift-menu-copy strong{font-size:1rem}
+ .shift-menu-copy>span{font-size:.875rem}
+ .proton-range-detail{grid-template-columns:1fr;gap:10px}
+}
+@media(max-width:340px){.shift-menu{grid-template-columns:1fr}.shift-menu-button{flex-direction:row;align-items:center}}
+.clue-grid .formula-card{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:10px}.clue-grid .formula-card>strong{margin:0}
+
+</style></head>
+<body><a class="skip" href="#main">문제로 바로 이동</a><div class="app-shell"><aside class="sidebar"><a class="brand" href="#main" aria-label="NMR Studio 홈"><span class="brand-mark">¹H</span><span>NMR <b>Studio</b><small>ORGANIC CHEMISTRY</small></span></a><p class="nav-label">LEARN BY SOLVING</p><nav id="module-nav" aria-label="학습 영역"></nav><div class="sidebar-bottom"><span>2학년 유기화학</span><strong>구조에서 스펙트럼까지.</strong><p>관찰하고, 비교하고,<br>근거를 연결하세요.</p></div></aside><div class="workspace"><header class="topbar"><span>분광학 실습실 <span class="divider">/</span> <b>¹H & ¹³C NMR</b></span><button class="text-button" id="sources-toggle">학습 기준 · 출처</button></header><main id="main" tabindex="-1"><div id="content"><div class="page-heading"><div><p class="eyebrow">01 / CHEMICAL EQUIVALENCE</p><h1>같은 환경, 같은 신호.</h1><p>구조의 대칭성과 수소의 화학적 환경을 살펴보세요.</p></div></div><section class="question-card"><div class="question-heading"><span class="badge">기초</span><span>문제 01</span></div><h2>에탄올의 수소는 몇 가지 화학적 환경으로 나뉠까요?</h2><div class="molecule-placeholder">CH₃ — CH₂ — OH</div><p>비키랄 용매, 상온의 빠른 분자 운동을 가정합니다. OH 수소도 포함합니다.</p><div class="choices"><button>2개</button><button>3개</button><button>4개</button><button>6개</button></div></section></div></main><footer>δ / ppm · TMS 기준 <span>학습용 모식 스펙트럼</span></footer></div></div><dialog id="sources-dialog"><div class="dialog-heading"><h2>학습 기준과 출처</h2><button id="sources-close" aria-label="닫기">×</button></div><div id="sources-content"></div></dialog><dialog id="peak-dialog" aria-labelledby="peak-dialog-title"><div class="dialog-heading"><div><p class="eyebrow">PEAK EXPLORER</p><h2 id="peak-dialog-title">갈라진 피크 자세히 보기</h2></div><button id="peak-close" aria-label="피크 확대 화면 닫기">×</button></div><div id="peak-dialog-body"></div></dialog><script id="nmr-data">
+/* Original teaching exercises; numerical spectra are illustrative, not measurements. */
+window.NMR_DATA = (()=>{
+const molecules={};
+const N=(label,x,y,g=null)=>({label,x,y,g});
+function chain(labels,groups=[],branches=[],orders={}){
+ const nodes=labels.map((s,i)=>N(s,65+i*90,130+(i%2?18:-18),groups[i]??null));
+ const edges=labels.slice(1).map((_,i)=>[i,i+1,orders[i]||1]);
+ for(const [at,label,dx,dy,g,order] of branches){nodes.push(N(label,nodes[at].x+dx,nodes[at].y+dy,g??null));edges.push([at,nodes.length-1,order||1]);}return{nodes,edges};
+}
+function ring(subs={},gs=['A','A','A','A','A','A'],aromatic=true){
+ const nodes=Array.from({length:6},(_,i)=>{const a=i*Math.PI/3-Math.PI/2;return N('',200+68*Math.cos(a),160+68*Math.sin(a),gs[i]);});
+ const edges=Array.from({length:6},(_,i)=>[i,(i+1)%6,aromatic&&i%2===0?2:1]);
+ for(const [i,v] of Object.entries(subs)){const a=Number(i)*Math.PI/3-Math.PI/2;nodes[i].g=null;nodes.push(N(v[0],nodes[i].x+90*Math.cos(a),nodes[i].y+72*Math.sin(a),v[1]??null));edges.push([Number(i),nodes.length-1,1]);}return{nodes,edges};
+}
+const S=(site,delta,h,mult='s',couplings=[],group=null)=>({site,delta,h,mult,couplings,group});
+function M(id,name,formula,graph,equivalence,signals=[],extra={}){molecules[id]={id,name,formula,...graph,equivalence,signals,...extra};}
+M('ethanol','에탄올','C2H6O',chain(['CH3','CH2','OH'],['A','B','C']),'CH₃의 세 H는 빠른 회전으로 평균화됩니다. CH₂의 두 H는 enantiotopic이며 비키랄 용매에서 등가입니다. OH를 포함해 3종입니다.',[S('CH₃',1.2,3,'t',[[2,7]],'A'),S('CH₂–O',3.6,2,'q',[[3,7]],'B'),S('OH',2.3,1,'br s',[],'C')]);
+M('dme','다이메틸 에터','C2H6O',chain(['CH3','O','CH3'],['A',null,'A']),'산소 양쪽 CH₃가 대칭적으로 같습니다. 수소 6개가 한 환경입니다.',[S('OCH₃ × 2',3.3,6,'s',[],'A')]);
+M('propane','프로페인','C3H8',chain(['CH3','CH2','CH3'],['A','B','A']),'양 끝 CH₃가 등가이고 중앙 CH₂는 별도 환경입니다. 2종이며 적분은 6H와 2H입니다.',[S('CH₃ × 2',0.9,6,'t',[[2,7]],'A'),S('중앙 CH₂',1.3,2,'sept',[[6,7]],'B')]);
+M('acetone','아세톤','C3H6O',chain(['CH3','C','CH3'],['A',null,'A'],[[1,'O',0,-85,null,2]]),'카보닐 양쪽 CH₃는 대칭으로 서로 바뀝니다. 6H 모두 한 환경입니다.',[S('COCH₃ × 2',2.1,6,'s',[],'A')]);
+M('ethylacetate','아세트산 에틸','C4H8O2',chain(['CH3','C','O','CH2','CH3'],['A',null,null,'B','C'],[[1,'O',0,-85,null,2]]),'아실 CH₃(A), OCH₂(B), 말단 CH₃(C)의 세 환경입니다. 두 메틸은 연결 방식이 달라 서로 등가가 아닙니다.',[S('COCH₃',2.1,3,'s',[],'A'),S('OCH₂',4.1,2,'q',[[3,7.1]],'B'),S('CH₂CH₃',1.3,3,'t',[[2,7.1]],'C')]);
+M('isopropanol','2-프로판올','C3H8O',chain(['CH3','CH','CH3'],['A','B','A'],[[1,'OH',0,-85,'C']]),'두 CH₃는 enantiotopic이며 비키랄 환경에서 등가입니다. CH와 OH를 더하면 3종입니다.',[S('CH₃ × 2',1.2,6,'d',[[1,6.2]],'A'),S('CH–O',3.9,1,'sept',[[6,6.2]],'B'),S('OH',2,1,'br s',[],'C')]);
+M('tertbutanol','tert-부탄올','C4H10O',chain(['CH3','C','OH'],['A',null,'B'],[[1,'CH3',0,-85,'A'],[1,'CH3',0,85,'A']]),'세 CH₃는 대칭적으로 같아 9H 한 환경입니다. OH를 더하면 2종입니다.',[S('C(CH₃)₃',1.3,9,'s',[],'A'),S('OH',2,1,'br s',[],'B')]);
+M('ether','다이에틸 에터','C4H10O',chain(['CH3','CH2','O','CH2','CH3'],['A','B',null,'B','A']),'산소 양쪽 에틸기가 등가입니다. CH₃ 6H와 CH₂ 4H의 두 환경만 있습니다.',[S('CH₃ × 2',1.2,6,'t',[[2,7]],'A'),S('OCH₂ × 2',3.5,4,'q',[[3,7]],'B')]);
+M('methylacetate','아세트산 메틸','C3H6O2',chain(['CH3','C','O','CH3'],['A',null,null,'B'],[[1,'O',0,-85,null,2]]),'COCH₃와 OCH₃는 모두 메틸이지만 연결된 원자가 달라 2종입니다.',[S('COCH₃',2.1,3,'s',[],'A'),S('OCH₃',3.7,3,'s',[],'B')]);
+M('butanone','2-부탄온','C4H8O',chain(['CH3','C','CH2','CH3'],['A',null,'B','C'],[[1,'O',0,-85,null,2]]),'COCH₃, COCH₂, 말단 CH₃의 세 환경입니다. CH₂의 enantiotopic H는 비키랄 용매에서 등가입니다.',[S('COCH₃',2.1,3,'s',[],'A'),S('COCH₂',2.4,2,'q',[[3,7.2]],'B'),S('CH₂CH₃',1,3,'t',[[2,7.2]],'C')]);
+M('benzene','벤젠','C6H6',ring(),'육각 고리의 대칭성으로 수소 6개가 모두 한 환경입니다.',[S('Ar–H',7.3,6,'s',[],'A')]);
+M('toluene','톨루엔','C7H8',ring({0:['CH3','A']},[null,'B','C','D','C','B']),'CH₃ 1종, ortho 2H, meta 2H, para 1H로 총 4종입니다. 실제로 겹쳐 보이는 피크 덩어리 수와 화학적 환경 수는 다를 수 있습니다.',[S('Ar–CH₃',2.3,3,'s',[],'A'),S('Ar–H (겹친 3환경)',7.2,5,'m')]);
+M('pxylene','p-자일렌','C8H10',ring({0:['CH3','A'],3:['CH3','A']},[null,'B','B',null,'B','B']),'같은 치환기의 para 대칭으로 두 CH₃가 등가이고 고리의 네 H도 모두 등가입니다. 총 2종입니다.',[S('CH₃ × 2',2.3,6,'s',[],'A'),S('Ar–H',7,4,'s',[],'B')]);
+M('oxylene','o-자일렌','C8H10',ring({0:['CH3','A'],1:['CH3','A']},[null,null,'B','C','C','B']),'두 CH₃는 같지만 고리의 H는 두 쌍으로 나뉩니다. 전체 3종이며 방향족 신호는 겹칠 수 있습니다.');
+M('mesitylene','메시틸렌','C9H12',ring({0:['CH3','A'],2:['CH3','A'],4:['CH3','A']},[null,'B',null,'B',null,'B']),'1,3,5-치환 대칭으로 메틸 9H가 한 환경, 고리 3H가 한 환경입니다.',[S('CH₃ × 3',2.3,9,'s',[],'A'),S('Ar–H',6.8,3,'s',[],'B')]);
+M('chloroethane','클로로에테인','C2H5Cl',chain(['CH3','CH2','Cl'],['A','B',null]),'CH₃와 CH₂Cl의 두 환경입니다. CH₂의 두 H는 비키랄 용매에서 등가입니다.',[S('CH₃',1.5,3,'t',[[2,7.2]],'A'),S('CH₂Cl',3.5,2,'q',[[3,7.2]],'B')]);
+M('dichloroethane','1,2-다이클로로에테인','C2H4Cl2',chain(['Cl','CH2','CH2','Cl'],[null,'A','A',null]),'양 끝이 같은 치환기이고 빠른 회전이 일어나는 조건에서 네 H는 한 화학적 환경으로 평균화됩니다.',[S('CH₂Cl × 2',3.7,4,'s',[],'A')]);
+M('bromochloromethane','브로모클로로메테인','CH2BrCl',chain(['Br','CH2','Cl'],[null,'A',null]),'두 H 중 하나씩 D로 치환하면 거울상 이성질체가 됩니다. enantiotopic이므로 비키랄 용매에서는 한 환경입니다.');
+M('ethylbenzene','에틸벤젠','C8H10',ring({0:['CH2CH3','A/B']},[null,'C','D','E','D','C']),'에틸 CH₂와 CH₃가 2종, 고리 ortho/meta/para가 3종으로 총 5종입니다. 방향족 세 환경은 겹쳐 보일 수 있습니다.',[S('CH₃',1.2,3,'t',[[2,7.5]],'B'),S('ArCH₂',2.6,2,'q',[[3,7.5]],'A'),S('Ar–H (겹친 3환경)',7.2,5,'m')]);
+M('styrene','스타이렌','C8H8',ring({0:['CH=CH2','A/B/C']},[null,'D','E','F','E','D']),'고리 H 3종, 비닐 H 3종으로 총 6종입니다. 말단 =CH₂의 두 H는 Ph에 대한 cis/trans 관계가 달라 서로 다른 환경입니다.');
+M('butanol2','2-부탄올','C4H10O',chain(['CH3','CH','CH2','CH3'],['A','B','C/D','E'],[[1,'OH',0,-85,'F','wedge']]),'CH(OH)는 입체중심입니다. 옆 CH₂의 두 H는 diastereotopic이므로 각각 한 환경입니다. 두 CH₃, CH, CH₂의 두 H, OH를 합하면 6종입니다. 라세미체에서도 CH₂의 두 H는 비등가입니다.',[],{stereo:'쐐기는 한 거울상 이성질체를 표시합니다. 반대 이성질체도 비키랄 용매에서 같은 스펙트럼입니다.'});
+M('vinylchloride','클로로에텐','C2H3Cl',{nodes:[N('C',140,140),N('CH',260,140,'C'),N('H',70,70,'A'),N('H',70,210,'B'),N('Cl',330,70)],edges:[[0,1,2],[0,2,1],[0,3,1],[1,4,1]]},'말단 =CH₂의 두 H는 Cl에 대해 각각 cis와 trans입니다. D 치환 결과가 diastereomer이므로 서로 다른 환경이며 CHCl의 H까지 총 3종입니다.');
+M('cyclohexane','사이클로헥세인','C6H12',ring({},['A','A','A','A','A','A'],false),'상온의 빠른 chair flip으로 axial/equatorial H가 평균화되어 12H가 한 환경입니다. 저온에서 운동이 느려지면 달라질 수 있습니다.',[S('고리 CH₂',1.4,12,'s',[],'A')]);
+M('neopentane','네오펜테인','C5H12',chain(['CH3','C','CH3'],['A',null,'A'],[[1,'CH3',0,-85,'A'],[1,'CH3',0,85,'A']]),'네 메틸기가 모두 대칭적으로 같고 각 메틸은 빠르게 회전합니다. 12H가 한 환경입니다.',[S('C(CH₃)₄',0.9,12,'s',[],'A')]);
+M('propanal','프로판알','C3H6O',chain(['CH3','CH2','CH'],['A','B','C'],[[2,'O',0,-85,null,2]]),'CH₃, α-CH₂, CHO가 서로 다른 3종입니다.',[S('CH₃',1,3,'t',[[2,7.3]],'A'),S('CH₂CHO',2.4,2,'qd',[[3,7.3],[1,1.8]],'B'),S('CHO',9.8,1,'t',[[2,1.8]],'C')]);
+M('methylpropanoate','프로판산 메틸','C4H8O2',chain(['CH3','CH2','C','O','CH3'],['A','B',null,null,'C'],[[2,'O',0,-85,null,2]]),'말단 CH₃, COCH₂, OCH₃의 3종입니다.',[S('CH₃',1.1,3,'t',[[2,7.3]],'A'),S('CH₂CO₂',2.3,2,'q',[[3,7.3]],'B'),S('OCH₃',3.7,3,'s',[],'C')]);
+M('propanoicacid','프로판산','C3H6O2',chain(['CH3','CH2','C','OH'],['A','B',null,'C'],[[2,'O',0,-85,null,2]]),'CH₃, CH₂COOH, 산성 OH의 3종입니다.',[S('CH₃',1.1,3,'t',[[2,7.4]],'A'),S('CH₂COOH',2.4,2,'q',[[3,7.4]],'B'),S('COOH',11.5,1,'br s',[],'C')]);
+M('isopropylacetate','아세트산 아이소프로필','C5H10O2',chain(['CH3','C','O','CH','CH3'],['A',null,null,'B','C'],[[1,'O',0,-85,null,2],[3,'CH3',0,85,'C']]),'아실 CH₃, OCH, 등가인 두 CH₃의 3종입니다.',[S('COCH₃',2,3,'s',[],'A'),S('OCH',5,1,'sept',[[6,6.2]],'B'),S('CH₃ × 2',1.2,6,'d',[[1,6.2]],'C')]);
+M('tertbutylacetate','아세트산 tert-부틸','C6H12O2',chain(['CH3','C','O','C','CH3'],['A',null,null,null,'B'],[[1,'O',0,-85,null,2],[3,'CH3',0,-85,'B'],[3,'CH3',0,85,'B']]),'아실 CH₃ 3H와 tert-부틸 9H의 두 환경입니다.',[S('COCH₃',2,3,'s',[],'A'),S('C(CH₃)₃',1.4,9,'s',[],'B')]);
+M('benzaldehyde','벤즈알데하이드','C7H6O',ring({0:['CHO','A']},[null,'B','C','D','C','B']),'CHO 1종과 고리 세 환경이 있습니다.',[S('CHO',10,1,'s',[],'A'),S('Ar–H (겹친 3환경)',7.7,5,'m')]);
+M('acetophenone','아세토페논','C8H8O',ring({0:['COCH3','A']},[null,'B','C','D','C','B']),'COCH₃ 1종과 고리 ortho/meta/para 3종입니다.',[S('COCH₃',2.6,3,'s',[],'A'),S('Ar–H (겹친 3환경)',7.7,5,'m')]);
+M('anisole','아니솔','C7H8O',ring({0:['OCH3','A']},[null,'B','C','D','C','B']),'OCH₃ 1종과 방향족 3종입니다.',[S('OCH₃',3.8,3,'s',[],'A'),S('Ar–H (겹친 3환경)',7,5,'m')]);
+M('benzylalcohol','벤질 알코올','C7H8O',ring({0:['CH2OH','A/B']},[null,'C','D','E','D','C']),'벤질 CH₂, OH, 방향족 세 환경으로 총 5종입니다.',[S('ArCH₂OH',4.6,2,'s',[],'A'),S('OH',2,1,'br s',[],'B'),S('Ar–H (겹친 3환경)',7.3,5,'m')]);
+M('methylbenzoate','벤조산 메틸','C8H8O2',ring({0:['CO2CH3','A']},[null,'B','C','D','C','B']),'OCH₃와 방향족 세 환경이 있습니다.',[S('OCH₃',3.9,3,'s',[],'A'),S('Ar–H (겹친 3환경)',7.7,5,'m')]);
+M('phenylacetate','아세트산 페닐','C8H8O2',ring({0:['OCOCH3','A']},[null,'B','C','D','C','B']),'아실 CH₃와 방향족 세 환경이 있습니다.',[S('COCH₃',2.3,3,'s',[],'A'),S('Ar–H (겹친 3환경)',7.2,5,'m')]);
+M('acetonitrile','아세토나이트릴','C2H3N',chain(['CH3','C','N'],['A',null,null],[],{1:3}),'메틸 3H가 한 환경입니다.',[S('CH₃CN',2,3,'s',[],'A')]);
+M('propanenitrile','프로페인나이트릴','C3H5N',chain(['CH3','CH2','C','N'],['A','B',null,null],[],{2:3}),'CH₃와 CH₂CN의 두 환경입니다.',[S('CH₃',1.3,3,'t',[[2,7.4]],'A'),S('CH₂CN',2.4,2,'q',[[3,7.4]],'B')]);
+M('propanol1','1-프로판올','C3H8O',chain(['CH3','CH2','CH2','OH'],['A','B','C','D']),'말단 CH₃, 중앙 CH₂, OCH₂, OH가 각각 다른 4종입니다.',[S('CH₃',0.9,3,'t',[[2,7.3]],'A'),S('중앙 CH₂',1.6,2,'qt',[[3,7.3],[2,6.6]],'B'),S('CH₂OH',3.6,2,'t',[[2,6.6]],'C'),S('OH',2,1,'br s',[],'D')]);
+M('butanal','부탄알','C4H8O',chain(['CH3','CH2','CH2','CH'],['A','B','C','D'],[[3,'O',0,-85,null,2]]),'세 알킬 환경과 CHO의 4종입니다.',[S('CH₃',0.9,3,'t',[[2,7.3]],'A'),S('중앙 CH₂',1.7,2,'qt',[[3,7.3],[2,7]],'B'),S('CH₂CHO',2.4,2,'td',[[2,7],[1,1.8]],'C'),S('CHO',9.8,1,'t',[[2,1.8]],'D')]);
+M('butanoicacid','부탄산','C4H8O2',chain(['CH3','CH2','CH2','C','OH'],['A','B','C',null,'D'],[[3,'O',0,-85,null,2]]),'CH₃, 두 종류 CH₂, 산성 OH의 4종입니다.',[S('CH₃',0.9,3,'t',[[2,7.3]],'A'),S('중앙 CH₂',1.6,2,'qt',[[3,7.3],[2,7.2]],'B'),S('CH₂COOH',2.3,2,'t',[[2,7.2]],'C'),S('COOH',11.5,1,'br s',[],'D')]);
+M('ethylformate','폼산 에틸','C3H6O2',chain(['CH','O','CH2','CH3'],['A',null,'B','C'],[[0,'O',0,-75,null,2]]),'포밀 H, OCH₂, CH₃의 세 환경입니다.',[S('HCO₂',8.1,1,'s',[],'A'),S('OCH₂',4.2,2,'q',[[3,7.1]],'B'),S('CH₃',1.3,3,'t',[[2,7.1]],'C')]);
+M('diethylketone','3-펜탄온','C5H10O',chain(['CH3','CH2','C','CH2','CH3'],['A','B',null,'B','A'],[[2,'O',0,-85,null,2]]),'카보닐 양쪽 에틸기가 등가입니다. CH₃ 6H와 CH₂ 4H의 두 환경입니다.',[S('CH₃ × 2',1,6,'t',[[2,7.2]],'A'),S('COCH₂ × 2',2.4,4,'q',[[3,7.2]],'B')]);
+M('propene','프로펜','C3H6',chain(['CH3','CH','CH2'],['A','B','C/D'],[],{1:2}),'메틸 1종, 비닐 H 3종으로 총 4종입니다.');
+M('propyne','프로파인','C3H4',chain(['CH3','C','CH'],['A',null,'B'],[],{1:3}),'메틸과 말단 알카인 H의 두 환경입니다.');
+M('bromoethane','브로모에테인','C2H5Br',chain(['CH3','CH2','Br'],['A','B',null]),'CH₃와 CH₂Br는 다른 환경입니다.');
+M('iodoethane','아이오도에테인','C2H5I',chain(['CH3','CH2','I'],['A','B',null]),'CH₃와 CH₂I는 다른 환경입니다.');
+M('dichloromethane','다이클로로메테인','CH2Cl2',chain(['Cl','CH2','Cl'],[null,'A',null]),'두 H는 대칭적으로 같아 한 환경입니다.');
+M('trichloromethane','클로로폼','CHCl3',chain(['Cl','CH','Cl'],[null,'A',null],[[1,'Cl',0,-85,null]]),'세 Cl에 연결된 탄소의 H는 크게 탈차폐됩니다.');
+M('chloroacetone','클로로아세톤','C3H5ClO',chain(['CH3','C','CH2','Cl'],['A',null,'B',null],[[1,'O',0,-85,null,2]]),'COCH₃와 COCH₂Cl는 별도 환경입니다.',[S('COCH₃',2.2,3,'s',[],'A'),S('COCH₂Cl',4.1,2,'s',[],'B')]);
+M('ethylamine','에틸아민','C2H7N',chain(['CH3','CH2','NH2'],['A','B','C']),'중성 아민의 CH₂–N은 일반 알킬 CH₂보다 탈차폐됩니다.');
+M('acetamide','아세트아마이드','C2H5NO',chain(['CH3','C','NH2'],['A',null,'B/C'],[[1,'O',0,-85,null,2]]),'아마이드 N–H는 수소결합과 제한된 C–N 회전의 영향을 받습니다.');
+M('dichloropropane','1,3-다이클로로프로페인','C3H6Cl2',chain(['Cl','CH2','CH2','CH2','Cl'],[null,'A','B','A',null]),'양쪽 CH₂Cl은 대칭적으로 등가입니다.');
+M('dimethoxymethane','다이메톡시메테인','C3H8O2',chain(['CH3','O','CH2','O','CH3'],['A',null,'B',null,'A']),'아세탈 CH₂는 두 산소에 연결됩니다.');
+// Expand substituents where distinct H environments need separate labels.
+for(const [id,last,group] of [['ethylbenzene','CH3','B'],['benzylalcohol','OH','B']]){
+ const mol=molecules[id];mol.nodes[6].label='CH2';mol.nodes[6].g='A';mol.nodes.push(N(last,310,mol.nodes[6].y,group));mol.edges.push([6,7,1]);
+}
+{
+ const mol=molecules.styrene;mol.nodes[6].label='CH';mol.nodes[6].g='A';
+ mol.nodes.push(N('C',310,20),N('H',382,-38,'B'),N('H',382,78,'C'));
+ mol.edges.push([6,7,2],[7,8,1],[7,9,1]);
+}
+{
+ const mol=molecules.butanol2;mol.nodes[2].label='C';mol.nodes[2].g=null;
+ mol.nodes.push(N('H',mol.nodes[2].x,mol.nodes[2].y-76,'C'),N('H',mol.nodes[2].x,mol.nodes[2].y+76,'D'));
+ mol.edges.push([2,5,1],[2,6,1]);
+}
+for(const id of ['propyne','acetonitrile'])for(const n of molecules[id].nodes)n.y=130;
+molecules.propanenitrile.nodes[3].y=76;
+return {molecules,S};
+})();
+
+Object.assign(window.NMR_DATA,(()=>{
+const {molecules:m}=window.NMR_DATA;
+const eqIds=['ethanol','dme','propane','acetone','ethylacetate','isopropanol','tertbutanol','ether','methylacetate','butanone','benzene','toluene','pxylene','oxylene','mesitylene','chloroethane','dichloroethane','bromochloromethane','ethylbenzene','styrene','butanol2','vinylchloride','cyclohexane','neopentane'];
+const eqCounts=[3,1,2,1,3,3,2,2,2,3,1,4,2,3,2,2,1,1,5,6,6,3,1,1];
+const eq=eqIds.map((id,i)=>{const ns=eqCounts[i]>4?[3,4,5,6]:[1,2,3,4];return{id:'eq-'+id,molecule:id,level:i>=17?'도전':i>=10?'응용':'기초',title:'이 구조의 수소는 몇 가지 화학적 환경으로 나뉠까요?',prompt:'비키랄 용매 · 상온 · 빠른 분자 운동을 가정합니다. OH를 포함하며 우연한 신호 겹침은 제외합니다.',options:ns.map(n=>n+'종'),answer:ns.indexOf(eqCounts[i]),explanation:m[id].equivalence,hint:'대칭으로 서로 바뀌는 위치를 찾고, CH₂의 두 H를 하나씩 D로 치환해 비교해 보세요.'};});
+const protonRanges=[
+['알킬 CH₃','R–CH₃',0.7,1.3,'propane',0,'인접한 전자 끄는 기가 없는 알킬 사슬 말단의 대표 범위입니다.'],
+['알킬 CH₂','R–CH₂–R',1.2,1.7,'propane',1,'포화 탄소 사이의 CH₂. 치환기에 따라 다른 범위와 겹칩니다.'],
+['알릴 수소','C=C–CH₃',1.6,2.3,'propene',0,'이중결합 옆 sp³ 탄소의 H이며 비닐 H와 구분합니다.'],
+['α-카보닐 수소','RCO–CH₃',2.0,2.7,'acetone',0,'카보닐 옆 sp³ 탄소의 H. 유도 효과와 자기적 비등방성의 영향을 받습니다.'],
+['벤질 수소','Ar–CH₂–R',2.2,3.0,'ethylbenzene',6,'방향족 고리 옆 sp³ 탄소의 H. 고리에 직접 붙은 H와 다릅니다.'],
+['말단 알카인 H','C≡C–H',1.8,3.1,'propyne',2,'삼중결합 축 방향의 차폐 영역에 있습니다. 혼성화만으로 이동 순서를 판단하지 않습니다.'],
+['α-나이트릴 수소','CH₂–C≡N',2.0,3.0,'propanenitrile',1,'나이트릴 옆 sp³ 탄소의 H입니다.'],
+['중성 아민의 C–H','CH₂–NH₂',2.2,3.3,'ethylamine',1,'질소에 결합한 탄소의 H. 양성자화하면 범위가 달라집니다.'],
+['할로젠 결합 탄소의 H','CH₂–Cl / Br',2.5,4.2,'chloroethane',1,'할로젠 종류와 치환 수에 민감합니다. CH₂Cl₂ 같은 다중 치환은 더 큰 δ가 가능합니다.'],
+['알코올·에터의 C–H','CH₂–O',3.2,4.2,'ethanol',1,'산소에 직접 연결된 탄소의 H이며 O–H와 구분합니다.'],
+['에스터의 O–C–H','RCOO–CH₂–R',3.6,5.3,'ethylacetate',3,'OCH₃, OCH₂, OCH에 따라 다릅니다. 에스터의 알콕시 쪽 수소입니다.'],
+['비닐 수소','C=C–H',4.5,6.5,'propene',1,'이중결합 탄소에 직접 붙은 H. 공액·치환 패턴의 영향을 받습니다.'],
+['방향족 수소','Ar–H',6.5,8.5,'benzene',1,'고리 전류와 치환기 효과를 함께 받습니다.'],
+['알데하이드 H','R–CHO',9.0,10.5,'propanal',2,'카보닐 탄소에 직접 붙은 H이며 COCH₃의 H와 다릅니다.'],
+['카복실산 O–H','R–COOH',10.0,13.0,'propanoicacid',3,'대체로 넓은 신호. 용매·농도·수소결합에 따라 이동과 폭이 변합니다.'],
+['알코올 O–H','R–OH',0.5,5.5,'ethanol',2,'교환성 H의 참고 범위. 이 범위 밖에 나타날 수도 있어 위치만으로 단정하지 않습니다.']
+].map((r,i)=>({id:'pr-'+i,name:r[0],fragment:r[1],min:r[2],max:r[3],molecule:r[4],target:r[5],note:r[6]}));
+const shiftSpecs=[
+['ethylacetate',3,'OCH₂',4.1,'산소에 직접 연결된 에스터의 CH₂입니다. 약 4.1 ppm은 OCH₂에 적합합니다.'],
+['ethylacetate',0,'COCH₃',2.1,'카보닐의 α 위치 수소입니다. OCH₃처럼 산소에 직접 연결된 탄소가 아닙니다.'],
+['methylacetate',3,'OCH₃',3.7,'에스터의 메톡시 수소로 약 3.7 ppm을 예상합니다.'],
+['ethanol',1,'CH₂OH',3.6,'산소의 유도 효과로 일반 알킬 CH₂보다 탈차폐되어 약 3.6 ppm입니다.'],
+['ethanol',0,'CH₃',1.2,'산소에서 한 탄소 떨어진 말단 메틸은 약 1.2 ppm으로 더 차폐됩니다.'],
+['acetone',0,'COCH₃',2.1,'카보닐 α 위치의 메틸 수소는 일반 메틸보다 큰 δ를 보입니다.'],
+['chloroethane',1,'CH₂Cl',3.5,'Cl에 직접 연결된 탄소의 H는 약 3.5 ppm입니다.'],
+['propene',1,'=CH',5.8,'sp² 탄소에 직접 붙은 비닐 H는 약 4.5–6.5 ppm 영역입니다.'],
+['propene',0,'알릴 CH₃',1.7,'sp³ 탄소에 붙어 있고 이중결합의 옆에 있습니다. 비닐 H와 달리 약 1.7 ppm입니다.'],
+['propyne',2,'말단 ≡C–H',2.0,'삼중결합 축의 차폐 효과 때문에 보통 비닐 H보다 upfield입니다.'],
+['benzene',1,'Ar–H',7.3,'고리 전류 때문에 고리 바깥 H가 탈차폐됩니다. 약 7.3 ppm을 사용합니다.'],
+['propanal',2,'CHO',9.8,'카보닐 탄소에 직접 붙은 알데하이드 H는 강하게 탈차폐됩니다.'],
+['propanoicacid',3,'COOH',11.5,'카복실산 OH의 모형 값입니다. 실제 이동은 수소결합과 용매·농도에 민감합니다.'],
+['propanenitrile',1,'CH₂CN',2.4,'전자 끄는 나이트릴 옆 CH₂이므로 약 2.4 ppm입니다.'],
+['ethylamine',1,'CH₂NH₂',2.7,'중성 아민의 N에 연결된 탄소의 H입니다. 암모늄염은 별도로 판단합니다.'],
+['dichloromethane',1,'CH₂Cl₂',5.3,'두 Cl의 효과가 함께 작용하므로 하나의 Cl을 가진 CH₂Cl보다 큰 δ입니다.']];
+const shifts=shiftSpecs.map((s,i)=>{const vals=[s[3],...[1,2.3,3.8,5.5,7.3,9.8,11.5].filter(n=>Math.abs(n-s[3])>1.2).slice(0,3)].sort((a,b)=>a-b);return{id:'shift-'+i,molecule:s[0],target:s[1],targetName:s[2],level:i>7?'응용':'기초',title:'강조한 수소의 화학적 이동은 어디에 가장 가까울까요?',prompt:'아래 보기에서 가장 타당한 대표값을 고르세요. 실제 δ는 용매·농도·온도에 따라 달라집니다.',options:vals.map(n=>n.toFixed(1)+' ppm'),answer:vals.indexOf(s[3]),explanation:s[4],hint:'강조한 H가 붙은 탄소의 혼성화와 O, N, 할로젠, π 결합까지의 거리를 확인하세요.'};});
+const cmp=[
+['ethanol',0,'CH₃','ethanol',1,'CH₂OH',1.2,3.6,'산소에 직접 연결된 CH₂의 H가 더 탈차폐됩니다. 산소에서 멀어지면 유도 효과가 감소합니다.'],
+['ethylacetate',0,'COCH₃','methylacetate',3,'OCH₃',2.1,3.7,'카보닐 옆 H와 산소에 직접 연결된 탄소의 H를 비교합니다. OCH₃가 더 downfield입니다.'],
+['ethanol',1,'CH₂OH','ethylacetate',3,'OCH₂',3.6,4.1,'둘 다 산소 옆 CH₂이지만 에스터의 알콕시 쪽 CH₂가 보통 더 downfield입니다.'],
+['bromoethane',1,'CH₂Br','chloroethane',1,'CH₂Cl',3.4,3.5,'이 에틸 할라이드 비교에서 CH₂Cl이 조금 더 downfield인 경향입니다. 작은 차이이므로 다른 구조 전체로 일반화하지 않습니다.'],
+['chloroethane',1,'CH₂Cl','iodoethane',1,'CH₂I',3.5,3.2,'이 동족 비교에서는 CH₂Cl이 CH₂I보다 더 downfield입니다.'],
+['chloroethane',1,'CH₂Cl','dichloromethane',1,'CH₂Cl₂',3.5,5.3,'같은 탄소에 Cl이 두 개 붙으면 탈차폐 효과가 커집니다.'],
+['dichloromethane',1,'CH₂Cl₂','trichloromethane',1,'CHCl₃',5.3,7.3,'Cl의 수가 증가한 CHCl₃의 H가 이 비교에서 더 큰 δ를 가집니다.'],
+['acetone',0,'COCH₃','chloroacetone',2,'COCH₂Cl',2.1,4.1,'카보닐 α 위치에 Cl의 효과가 더해져 CH₂Cl이 크게 탈차폐됩니다.'],
+['propene',0,'알릴 CH₃','propene',1,'비닐 CH',1.7,5.8,'이중결합 옆 sp³ 수소와 이중결합에 직접 붙은 sp² 수소는 다른 환경입니다.'],
+['propyne',2,'≡C–H','propene',1,'=CH',2.0,5.8,'알카인 수소는 삼중결합 축의 차폐 영역에 있습니다. s 성분이 크다고 항상 downfield인 것은 아닙니다.'],
+['ethanol',1,'CH₂OH','ethylamine',1,'CH₂NH₂',3.6,2.7,'중성 형태끼리 비교하면 O에 연결된 CH₂가 N에 연결된 CH₂보다 보통 탈차폐됩니다.'],
+['propanoicacid',3,'COOH','ethanol',2,'OH',11.5,2.3,'둘 다 O–H이지만 카복실산 OH가 대체로 훨씬 downfield입니다. 교환성 H의 정확한 차이는 고정되지 않습니다.']];
+const compare=cmp.map((s,i)=>{const dir=i%2===0?'downfield':'upfield';return{id:'compare-'+i,level:i>5?'응용':'기초',title:`A와 B 중 어느 수소가 더 ${dir}에 나타날까요?`,prompt:dir==='downfield'?'Downfield = 더 큰 δ = 왼쪽':'Upfield = 더 작은 δ = 오른쪽',pair:[{molecule:s[0],target:s[1],label:s[2],delta:s[6]},{molecule:s[3],target:s[4],label:s[5],delta:s[7]}],options:['A 수소','B 수소'],answer:(dir==='downfield'?s[6]>s[7]:s[6]<s[7])?0:1,explanation:s[8],hint:'전자 끄는 기와의 거리, π 결합의 비등방성, 수소결합을 차례로 비교하세요.'};});
+const splitting=[
+['ethanol',0,'CH₃','한쪽 이웃',[[2,7]],['singlet · 1선','doublet · 2선','triplet · 3선','quartet · 4선'],2,'CH₃는 옆 CH₂의 등가 2H와 결합합니다. 2+1=3선, 세기 1:2:1입니다. CH₃ 자체의 3H를 이웃 수에 더하지 않습니다.'],
+['ethanol',1,'CH₂OH','한쪽 이웃',[[3,7]],['triplet · 3선','quartet · 4선','quintet · 5선','septet · 7선'],1,'빠른 OH 교환으로 OH 결합을 무시하면 옆 CH₃의 3H에 의해 4선으로 갈라집니다. 세기는 1:3:3:1입니다.'],
+['isopropanol',0,'CH₃','한쪽 이웃',[[1,6.2]],['singlet · 1선','doublet · 2선','triplet · 3선','septet · 7선'],1,'각 CH₃는 옆 CH의 1H에 의해 doublet이 됩니다. 반대편 메틸의 H는 통상적인 3결합 이웃으로 세지 않습니다.'],
+['propane',1,'중앙 CH₂','양쪽 등가 이웃',[[6,7]],['triplet · 3선','quartet · 4선','septet · 7선','16선'],2,'양쪽 CH₃는 등가이며 중앙 H와 같은 J를 가집니다. 총 6H로 7선, 세기 1:6:15:20:15:6:1입니다. 같은 위치에 겹친 선을 16선으로 세지 않습니다.'],
+['dichloropropane',2,'중앙 CH₂','양쪽 등가 이웃',[[4,7]],['triplet · 3선','quintet · 5선','septet · 7선','9선'],1,'1차 근사에서 양쪽 CH₂Cl의 총 4H가 같은 J로 작용하여 5선이 됩니다. 세기는 1:4:6:4:1입니다. 실제 다중 스핀계의 고차 효과는 별도 고려합니다.'],
+['propanol1',1,'중앙 CH₂','양쪽 비등가 이웃',[[3,8],[2,5]],['항상 sextet · 6선','quartet of triplets · 최대 12선','triplet · 3선','septet · 7선'],1,'한쪽 CH₃(3H), 다른 쪽 CH₂OH(2H)에 J=8, 5 Hz를 주면 (3+1)(2+1)=12선입니다. 이 J는 원리를 보여 주는 설정값입니다.'],
+['propanol1',1,'중앙 CH₂','양쪽 비등가 이웃',[[3,7],[2,7]],['겉보기 sextet · 6선','항상 12선','singlet · 1선','doublet · 2선'],0,'화학적으로 다른 두 이웃의 J가 우연히 같으면 12개 전이가 6개 위치에 겹칩니다. 세기는 1:5:10:10:5:1입니다. 6선만 보고 이웃 전체가 화학적으로 같다고 단정할 수 없습니다.'],
+['vinylchloride',1,'CHCl의 H','양쪽 비등가 이웃',[[1,14],[1,8]],['triplet · 3선','doublet of doublets · 4선','quartet · 1:3:3:1','singlet · 1선'],1,'비닐 이웃 H의 cis/trans 관계가 달라 J도 다릅니다. J=14, 8 Hz의 1차 모형에서 1:1:1:1인 dd입니다. 네 선이라고 항상 quartet은 아닙니다.'],
+['acetone',0,'COCH₃','한쪽 이웃',[],['singlet · 1선','doublet · 2선','quartet · 4선','septet · 7선'],0,'이웃 카보닐 탄소에는 H가 없습니다. 반대편 CH₃까지 장거리 결합을 무시하면 singlet입니다. 같은 CH₃의 등가 H는 서로를 갈라놓지 않습니다.']
+].map((s,i)=>({id:'split-'+i,molecule:s[0],target:s[1],targetName:s[2],category:s[3],couplings:s[4],options:s[5],answer:s[6],explanation:s[7],level:i>=5&&i<=7?'도전':'기초',title:`${s[2]} 신호는 어떻게 갈라질까요?`,prompt:`${s[3]} · Δν ≫ J의 1차 근사 · 장거리 결합 무시 · OH 빠른 교환`,hint:'각 이웃 집합의 H 개수와 J를 따로 적어 보세요. 같은 J면 선이 겹칩니다.'}));
+return {eq,protonRanges,shifts,compare,splitting};
+})());
+
+Object.assign(window.NMR_DATA,(()=>{
+const {molecules:m}=window.NMR_DATA;
+const matchSpecs=[
+['ethylacetate',['ethylacetate','methylpropanoate','butanoicacid','tertbutanol'],'3H singlet와 2H quartet/3H triplet가 함께 있고 quartet이 약 4.1 ppm입니다. –OCH₂CH₃와 CH₃CO–를 연결합니다.','프로판산 메틸은 OCH₃ singlet가 약 3.7 ppm입니다. 부탄산은 COOH와 더 많은 알킬 환경을, tert-부탄올은 9H singlet를 가져야 합니다.'],
+['methylpropanoate',['ethylacetate','methylpropanoate','butanoicacid','ethylformate'],'3.7 ppm의 3H singlet는 OCH₃, 2.3 ppm의 quartet은 COCH₂입니다. 에틸기가 카보닐 탄소 쪽에 연결됩니다.','아세트산 에틸의 quartet은 OCH₂라 약 4.1 ppm입니다. 부탄산은 산성 OH가, 폼산 에틸은 포밀 1H가 필요합니다.'],
+['isopropanol',['propanol1','isopropanol','ether','acetone'],'6H doublet와 1H septet의 같은 J는 (CH₃)₂CH–를 뜻합니다. CH가 약 3.9 ppm이고 OH가 있어 2-프로판올입니다.','1-프로판올은 말단 3H triplet, 에터는 6H triplet/4H quartet, 아세톤은 6H singlet입니다.'],
+['butanone',['butanal','butanone','ethylacetate','diethylketone'],'3H singlet인 COCH₃와 COCH₂CH₃의 quartet/triplet가 보입니다. 전체 적분은 8H입니다.','부탄알은 약 9.8 ppm CHO가 필요합니다. 에스터 OCH₂는 약 4.1 ppm, 3-펜탄온은 두 환경(6H:4H)입니다.'],
+['ether',['ethanol','ether','methylacetate','tertbutanol'],'6H triplet와 4H quartet는 대칭적인 두 에틸기입니다. CH₂가 약 3.5 ppm으로 산소 옆에 해당합니다.','에탄올의 CH₂는 2H입니다. 아세트산 메틸은 두 singlet, tert-부탄올은 9H singlet가 필요합니다.'],
+['ethylbenzene',['toluene','ethylbenzene','anisole','acetophenone'],'벤질 CH₂ quartet와 말단 CH₃ triplet에 방향족 5H가 더해집니다. 적분 합은 10H입니다.','톨루엔은 3H singlet, 아니솔은 OCH₃ singlet, 아세토페논은 COCH₃ singlet가 필요합니다.'],
+['isopropylacetate',['ethylacetate','isopropylacetate','tertbutylacetate','methylpropanoate'],'5.0 ppm의 1H septet와 6H doublet는 OCH(CH₃)₂입니다. 3H 아실 singlet와 연결하면 아세트산 아이소프로필입니다.','에틸 에스터는 2H quartet, tert-부틸 에스터는 9H singlet, 메틸 에스터는 3H OCH₃ singlet가 필요합니다.'],
+['propanal',['propanal','acetone','propanoicacid','propanol1'],'9.8 ppm 1H가 알데하이드를 지시합니다. 작은 J의 triplet이며 α-CH₂에는 CH₃와 CHO에 의한 qd가 있습니다.','아세톤에는 CHO가 없습니다. 프로판산 OH는 넓고 대체로 10–13 ppm이며, 1-프로판올에는 OCH₂가 약 3.6 ppm에 필요합니다.']];
+const matching=matchSpecs.map((s,i)=>({id:'match-'+i,level:i<4?'응용':'도전',title:'이 ¹H NMR 스펙트럼에 맞는 구조를 고르세요.',prompt:'네 구조를 비교하고 화학적 이동, 갈라짐, 적분을 함께 사용하세요.',molecule:s[0],structureOptions:s[1],options:s[1].map(id=>m[id].name),answer:s[1].indexOf(s[0]),explanation:s[2],elimination:s[3],hint:'적분값이 큰 신호와 4 ppm 이상 신호를 찾고 에틸·아이소프로필 패턴을 비교하세요.'}));
+const integratedSpecs=[
+['ethylacetate',['methylpropanoate','ethylacetate','butanoicacid','tertbutanol'],[['1740','강함','C=O'],['1240','강함','C–O'],['3200–3600','넓은 띠 없음','알코올 O–H 없음']],'강한 C=O와 C–O 띠로 에스터를 고려합니다. 4.1 ppm quartet/1.3 ppm triplet는 OCH₂CH₃이고 2.1 ppm 3H singlet는 아실 메틸입니다.'],
+['methylpropanoate',['methylpropanoate','ethylacetate','butanoicacid','ethylformate'],[['1740','강함','C=O'],['1200','강함','C–O'],['2500–3300','매우 넓은 띠 없음','산 O–H 없음']],'강한 C=O와 C–O 띠로 에스터를 고려합니다. 3.7 ppm 3H singlet를 OCH₃에, 2.3 ppm quartet을 COCH₂에 배정하면 CH₃CH₂CO₂CH₃입니다.'],
+['butanone',['butanal','butanone','ethylacetate','propanol1'],[['1715','강함','C=O'],['2720 / 2820','관찰 안 됨','알데하이드 C–H 쌍 없음'],['3200–3600','넓은 띠 없음','O–H 없음']],'C=O는 있지만 CHO H가 없고 2.1 ppm 3H singlet가 있어 메틸 케톤입니다. 2H quartet와 3H triplet를 연결합니다.'],
+['propanal',['acetone','propanal','propanol1','propanoicacid'],[['1730','강함','C=O'],['2720 / 2820','약함','알데하이드 C–H']],'9.8 ppm 1H 및 IR의 알데하이드 C–H로 CHO를 확인하고 나머지 2H와 3H로 에틸기를 만듭니다.'],
+['isopropanol',['propanol1','isopropanol','acetone','ether'],[['3200–3600','넓음','O–H'],['1100','강함','C–O'],['1700–1750','강한 띠 없음','C=O 없음']],'넓은 O–H 띠가 있고 C=O 띠는 없어 알코올을 예상합니다. 6H doublet/1H septet는 두 등가 메틸에 연결된 CH를 나타냅니다.'],
+['propanoicacid',['methylacetate','ethylformate','propanoicacid','propanal'],[['1710','강함','C=O'],['2500–3300','매우 넓음','카복실산 O–H']],'매우 넓은 산 O–H와 C=O로 카복실산을 정합니다. 11.5 ppm 교환성 1H와 CH₂CH₃의 quartet/triplet가 프로판산에 맞습니다.'],
+['propanenitrile',['propanenitrile','acetonitrile','ethylamine','propanal'],[['2250','날카로움','C≡N'],['1700–1750','강한 띠 없음','C=O 없음']],'분자식에 질소가 있고 2250 cm⁻¹의 날카로운 띠가 있어 나이트릴을 확인합니다. 2.4 ppm 2H quartet/1.3 ppm 3H triplet는 –CH₂CH₃입니다.'],
+['methylbenzoate',['phenylacetate','methylbenzoate','benzylalcohol','acetophenone'],[['1725','강함','공액 에스터 C=O'],['1270','강함','C–O'],['1600','중간','방향족 고리']],'IR의 C=O, C–O와 방향족 고리 신호를 함께 확인합니다. 방향족 5H와 3.9 ppm OCH₃ singlet는 C₆H₅CO₂CH₃입니다. 아세트산 페닐의 CH₃는 약 2.3 ppm이어야 합니다.']];
+const integrated=integratedSpecs.map((s,i)=>({id:'integrated-'+i,level:i>5?'도전':'응용',title:'분자식 · IR · ¹H NMR을 연결해 구조를 결정하세요.',prompt:'분자식을 확인하고 IR로 작용기를 좁힌 뒤 NMR의 모든 신호를 설명하세요.',molecule:s[0],structureOptions:s[1],options:s[1].map(id=>m[id].name),answer:s[1].indexOf(s[0]),formula:m[s[0]].formula,ir:s[2],explanation:s[3],hint:'분자식의 원소 종류와 수소 수를 확인하세요. IR의 작용기 단서와 NMR의 이동·갈라짐·적분이 모두 맞는 구조를 찾으세요.'}));
+const carbonRanges=[
+['알킬 CH₃','R–CH₃',5,30,'propane',0,'보통 upfield 쪽입니다. 고리·치환기에 따라 넓게 달라집니다.'],
+['알킬 CH₂','R–CH₂–R',15,45,'propane',1,'CH₃ 범위와 겹칩니다. δ만으로 탄소 종류를 확정하지 않습니다.'],
+['알킬 CH / 4차 C','R₃CH / R₄C',20,60,'neopentane',1,'CH와 H가 없는 4차 탄소가 모두 포함될 수 있습니다.'],
+['벤질 탄소','Ar–CH₂–R',20,50,'ethylbenzene',6,'고리 옆 sp³ 탄소. 고리 탄소 자체와 구분합니다.'],
+['α-카보닐 탄소','RCO–CH₃ / CH₂',20,55,'acetone',0,'카보닐에 이웃한 sp³ 탄소이며 C=O 탄소가 아닙니다.'],
+['C–N 탄소','R–CH₂–NR₂',30,65,'ethylamine',1,'질소에 직접 연결된 sp³ 탄소입니다.'],
+['C–Cl / C–Br 탄소','R–CH₂–X',25,80,'chloroethane',1,'할로젠 종류와 치환 수에 민감합니다. C–I에는 이 범위를 적용하지 않습니다.'],
+['알코올·에터 C–O','R–CH₂–O',50,90,'ethanol',1,'산소에 직접 연결된 sp³ 탄소입니다.'],
+['에스터 OCH₃','RCO₂CH₃',50,55,'methylacetate',3,'OCH₃ 탄소와 에스터 C=O 탄소는 매우 다른 영역입니다.'],
+['아세탈 탄소','O–C–O',90,110,'dimethoxymethane',2,'두 O에 연결된 동일 탄소의 대표 범위입니다.'],
+['알카인 탄소','C≡C',65,100,'propyne',1,'sp 탄소입니다. 두 알카인 탄소는 서로 다른 δ를 가질 수 있습니다.'],
+['나이트릴 탄소','C≡N',110,125,'propanenitrile',2,'삼중결합이지만 일반 알카인 탄소와 다른 범위입니다.'],
+['알켄 탄소','C=C',100,150,'propene',1,'전자 주는 기·전자 끄는 기에 직접 연결되면 범위가 확장됩니다.'],
+['방향족 탄소','Ar–C',110,160,'benzene',1,'고리 CH와 ipso 4차 탄소를 포함합니다. Ar–O는 흔히 큰 δ입니다.'],
+['산·에스터·아마이드 C=O','R–C(=O)–O/N',160,185,'ethylacetate',1,'헤테로원자와 공명하여 케톤 C=O보다 보통 작은 δ에 나타납니다.'],
+['알데하이드·케톤 C=O','R–CHO / R₂C=O',190,220,'acetone',1,'보통 가장 downfield 영역입니다. 광대역 ¹H 탈결합 스펙트럼에서는 n+1로 해석하지 않습니다.']
+].map((r,i)=>({id:'cr-'+i,name:r[0],fragment:r[1],min:r[2],max:r[3],molecule:r[4],target:r[5],note:r[6]}));
+const carbonExamples=[
+{molecule:'ethanol',peaks:[{site:'CH₃',delta:18,n:1},{site:'CH₂OH',delta:58,n:1}],note:'탄소 2개가 두 환경입니다. 산소에 결합한 CH₂가 더 downfield입니다.'},
+{molecule:'acetone',peaks:[{site:'등가 CH₃ × 2',delta:30,n:2},{site:'C=O',delta:207,n:1}],note:'탄소 3개지만 환경은 2종입니다. 두 등가 메틸이 한 위치에 나타납니다.'},
+{molecule:'ethylacetate',peaks:[{site:'CH₂CH₃',delta:14,n:1},{site:'COCH₃',delta:21,n:1},{site:'OCH₂',delta:60,n:1},{site:'C=O',delta:171,n:1}],note:'4개 환경입니다. 두 메틸, OCH₂, 에스터 C=O를 구분합니다.'},
+{molecule:'benzene',peaks:[{site:'고리 C × 6',delta:128,n:6}],note:'대칭으로 여섯 탄소가 모두 등가이므로 한 신호입니다.'},
+{molecule:'propanenitrile',peaks:[{site:'CH₃',delta:10,n:1},{site:'CH₂CN',delta:12,n:1},{site:'C≡N',delta:120,n:1}],note:'나이트릴 탄소는 알카인 범위와 다릅니다. 두 알킬 탄소의 δ만으로 연결 순서를 단정하지 않습니다.'},
+{molecule:'butanone',peaks:[{site:'CH₂CH₃',delta:8,n:1},{site:'COCH₃',delta:29,n:1},{site:'COCH₂',delta:37,n:1},{site:'C=O',delta:209,n:1}],note:'케톤 C=O는 약 209 ppm이고 비대칭 구조여서 네 탄소가 모두 다릅니다.'}];
+const sources=[
+{title:'John McMurry · OpenStax, 13.3 Chemical Shifts',url:'https://openstax.org/books/organic-chemistry/pages/13-3-chemical-shifts',detail:'δ 정의, TMS 기준과 방향'},
+{title:'OpenStax, 13.4 Chemical Shifts in ¹H NMR',url:'https://openstax.org/books/organic-chemistry/pages/13-4-chemical-shifts-in-1h-nmr-spectroscopy',detail:'수소 환경과 화학적 이동'},
+{title:'OpenStax, 13.6 Spin–Spin Splitting',url:'https://openstax.org/books/organic-chemistry/pages/13-6-spin-spin-splitting-in-1h-nmr-spectra',detail:'1차 갈라짐과 결합상수'},
+{title:'OpenStax, 13.11 Characteristics of ¹³C NMR',url:'https://openstax.org/books/organic-chemistry/pages/13-11-characteristics-of-13c-nmr-spectroscopy',detail:'탄소 환경과 화학적 이동'},
+{title:'OpenStax, 12.7 Interpreting Infrared Spectra',url:'https://openstax.org/books/organic-chemistry/pages/12-7-interpreting-infrared-spectra',detail:'IR 작용기 배정'},
+{title:'Hans Reich’s Collection · ACS Organic Division',url:'https://organicchemistrydata.org/hansreich/resources/nmr/',detail:'화학적 등가성, 입체관계와 결합 해석'}];
+return{matching,integrated,carbonRanges,carbonExamples,sources};
+})());
+
+// Molecular proton assignments reuse the same illustrative signals as the exercises.
+window.NMR_DATA.protonExamples=[
+ {molecule:'ethanol',note:'CH₃, 산소에 연결된 CH₂, OH를 비교하세요. O–H와 C–O의 탄소 수소는 다른 환경입니다.'},
+ {molecule:'acetone',note:'대칭으로 등가인 두 메틸의 6H가 하나의 신호를 만듭니다. 둘 다 카보닐 옆 수소입니다.'},
+ {molecule:'ethylacetate',note:'COCH₃와 OCH₂CH₃를 구별하세요. 산소에 직접 연결된 CH₂가 가장 큰 δ에 나타납니다.'},
+ {molecule:'methylacetate',note:'COCH₃와 OCH₃는 모두 3H singlet이지만 연결된 원자가 달라 화학적 이동이 다릅니다.'},
+ {molecule:'isopropanol',note:'두 등가 메틸은 6H, 산소에 연결된 CH는 1H입니다. OH의 위치는 측정 조건에 민감합니다.'},
+ {molecule:'propanal',note:'말단 CH₃, 카보닐 옆 CH₂, 알데하이드 H를 순서대로 배정하세요. CHO의 작은 갈라짐도 확대해 볼 수 있습니다.'},
+ {molecule:'benzene',note:'여섯 방향족 H가 대칭으로 등가입니다. 고리 위의 같은 문자 A와 하나의 6H 신호를 연결하세요.'},
+ {molecule:'butanone',note:'두 메틸은 등가가 아닙니다. COCH₃, COCH₂, 말단 CH₃의 이동과 적분을 함께 비교하세요.'}
+];
+
+// Balance answer positions without altering the chemical content.
+for(const [key,seed] of [['matching',2],['integrated',1]]){
+ window.NMR_DATA[key].forEach((q,i)=>{
+  const wanted=(i*3+seed)%4,offset=(wanted-q.answer+4)%4;
+  const rotate=a=>a.map((_,j)=>a[(j-offset+4)%4]);
+  q.options=rotate(q.options);q.structureOptions=rotate(q.structureOptions);q.answer=wanted;
+ });
+}
+
+</script>
+<script id="nmr-app">
+(() => {
+'use strict';
+const D=window.NMR_DATA;
+const modules=[
+ {id:'eq',label:'화학적 등가성',en:'CHEMICAL EQUIVALENCE',heading:'같은 환경, 같은 신호.',desc:'대칭과 입체관계로 화학적으로 등가인 수소를 찾아보세요.'},
+ {id:'shifts',label:'¹H 화학적 이동',en:'CHEMICAL SHIFT',heading:'이 수소는 어디에 있을까?',desc:'구조 속 수소의 환경을 ppm 눈금 위에 연결하세요.'},
+ {id:'compare',label:'Upfield · Downfield',en:'COMPARE & REASON',heading:'두 수소 사이의 작은 차이.',desc:'비슷한 환경을 비교하고 차폐 차이의 원인을 찾아보세요.'},
+ {id:'splitting',label:'갈라짐 패턴',en:'SPIN–SPIN SPLITTING',heading:'이웃을 알면, 패턴이 보인다.',desc:'한쪽 이웃부터 두 종류의 이웃까지, H 개수와 J를 함께 읽으세요.'},
+ {id:'matching',label:'구조 ↔ 스펙트럼',en:'MATCH THE STRUCTURE',heading:'네 구조, 하나의 스펙트럼.',desc:'화학적 이동·갈라짐·적분이 모두 맞는 구조를 선택하세요.'},
+ {id:'integrated',label:'IR + NMR 구조 해석',en:'STRUCTURE DETECTIVE',heading:'단서를 연결해 구조를 찾다.',desc:'분자식과 IR, NMR의 모든 관찰을 하나의 구조로 설명하세요.'},
+ {id:'carbon',label:'¹³C 화학적 이동',en:'CARBON REFERENCE',heading:'탄소의 환경을 읽는 지도.',desc:'작용기별 이동 범위와 분자별 탄소 배정을 함께 살펴보세요.'}
+];
+const $=s=>document.querySelector(s);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const chem=v=>esc(v).replace(/(\d+)/g,'<tspan baseline-shift="sub" font-size="70%">$1</tspan>');
+const formula=v=>esc(v).replace(/(\d+)/g,'<sub>$1</sub>');
+const colors=['#2459d4','#c46120','#8150ba','#168479','#c74064','#556578'];
+const color=g=>colors[Math.max(0,String(g||'A').charCodeAt(0)-65)%colors.length];
+const state={module:'eq',cursor:{},selected:null,answers:{},firstAnswers:{},hints:new Set(),view:'quiz',range:0,carbonExample:0,protonExample:0,protonSignal:0,lab:{nA:3,nB:2,jA:8,jB:5}};
+const getPool=()=>D[state.module]||[];
+const question=()=>getPool()[state.cursor[state.module]||0];
+
+function molecule(id,{reveal=false,target=null,targetGroup=null,compact=false,caption=true}={}){
+ const m=D.molecules[id];if(!m)return '';
+ const minX=Math.min(...m.nodes.map(n=>n.x))-58,maxX=Math.max(...m.nodes.map(n=>n.x))+58;
+ const minY=Math.min(...m.nodes.map(n=>n.y))-62,maxY=Math.max(...m.nodes.map(n=>n.y))+58;
+ let g='';
+ for(const [a,b,order] of m.edges){
+  const n=m.nodes[a],p=m.nodes[b],dx=p.x-n.x,dy=p.y-n.y,len=Math.hypot(dx,dy),ux=dx/len,uy=dy/len;
+  const pad=t=>t.label?Math.min(42,Math.max(13,t.label.length*7.5+2)):1;
+  const x1=n.x+ux*pad(n),y1=n.y+uy*pad(n),x2=p.x-ux*pad(p),y2=p.y-uy*pad(p);
+  if(order==='wedge'){g+=`<polygon points="${x1},${y1} ${x2-uy*7},${y2+ux*7} ${x2+uy*7},${y2-ux*7}" fill="#22334b"/>`;continue;}
+  const offsets=order===3?[-5,0,5]:order===2?[-3,3]:[0];
+  for(const ofst of offsets)g+=`<line x1="${x1-uy*ofst}" y1="${y1+ux*ofst}" x2="${x2-uy*ofst}" y2="${y2+ux*ofst}" stroke="#26364d" stroke-width="2.3" stroke-linecap="round"/>`;
+ }
+ m.nodes.forEach((n,i)=>{
+  const active=target===i||(targetGroup!==null&&n.g===targetGroup);const c=active?'#2459d4':reveal&&n.g?color(n.g):/^(O|OH|NH2|N|Cl|Br|I)$/.test(n.label)?'#385d7b':'#17253e';
+  if(active&&n.label)g+=`<rect x="${n.x-41}" y="${n.y-26}" width="82" height="50" rx="12" fill="#eaf0ff" stroke="#2459d4" stroke-width="1.8"/>`;
+  if(n.label)g+=`<text x="${n.x}" y="${n.y+7}" text-anchor="middle" fill="${c}" font-size="23" font-weight="550" font-family="Arial,sans-serif">${chem(n.label)}</text>`;
+  if(active&&!n.label)g+=`<circle cx="${n.x}" cy="${n.y}" r="7" fill="${c}"/>`;
+  if(reveal&&n.g){
+   const isRing=n.label==='';
+   const preferred=isRing?[(n.x<200?-24:n.x>200?24:0),(n.y<160?-24:30)]:[0,34];
+   const candidates=[preferred,[0,-32],[42,5],[-42,5],[34,30],[-34,30],[34,-25],[-34,-25]];
+   const segmentDistance=(px,py,a,b)=>{const dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1,((px-a.x)*dx+(py-a.y)*dy)/(dx*dx+dy*dy)));return Math.hypot(px-a.x-t*dx,py-a.y-t*dy);};
+   const scored=candidates.map(([dx,dy],j)=>{const px=n.x+dx,py=n.y+dy-5;let penalty=j*.4;
+    for(const [a,b] of m.edges){const d=segmentDistance(px,py,m.nodes[a],m.nodes[b]);if(d<14)penalty+=(14-d)*8;}
+    for(const a of m.nodes){const rx=a.label?Math.max(16,a.label.length*7):9,ry=a.label?18:10;const v=((px-a.x)/rx)**2+((py-a.y)/ry)**2;if(v<1.5)penalty+=(1.5-v)*100;}
+    return{dx,dy,penalty};});
+   scored.sort((a,b)=>a.penalty-b.penalty);const {dx,dy}=scored[0];
+   g+=`<text x="${n.x+dx}" y="${n.y+dy}" text-anchor="middle" fill="${c}" font-size="16" font-weight="700" font-family="Arial,sans-serif">${esc(n.g)}</text>`;
+  }
+ });
+ return `<figure class="molecule ${compact?'compact':''}"><svg viewBox="${minX} ${minY} ${maxX-minX} ${maxY-minY}" role="img" aria-label="${esc(m.name)}의 화학 구조${target!==null||targetGroup!==null?', 파란색 강조는 관찰할 위치':''}${reveal?', 문자는 수소 환경 배정':''}">${g}</svg>${caption?`<figcaption>${esc(m.name)} <span>${formula(m.formula)}</span></figcaption>`:''}</figure>`;
+}
+function binomial(n){let a=[1];for(let i=0;i<n;i++){const b=[1];for(let j=1;j<a.length;j++)b.push(a[j-1]+a[j]);b.push(1);a=b;}return a;}
+function splitLines(couplings){
+ let lines=[{hz:0,weight:1}];
+ for(const [n,j] of couplings){if(n===0||j===0)continue;const bs=binomial(n),next=[];for(const l of lines)bs.forEach((w,k)=>next.push({hz:l.hz+(k-n/2)*j,weight:l.weight*w/2**n}));lines=next;}
+ const merged=new Map();for(const l of lines){const k=Math.round(l.hz*1e6);merged.set(k,(merged.get(k)||0)+l.weight);}return[...merged].sort((a,b)=>a[0]-b[0]).map(([h,w])=>({hz:h/1e6,weight:w}));
+}
+function lineSignal(s){
+ if(s.mult==='m'){const offsets=[-.24,-.19,-.14,-.10,-.06,-.025,.015,.055,.09,.13,.18,.23],ws=[1,2,4,3,5,4,4,5,3,4,2,1],total=ws.reduce((a,b)=>a+b,0);return offsets.map((off,i)=>({delta:s.delta+off,area:s.h*ws[i]/total,gamma:.010}));}
+ return splitLines(s.couplings||[]).map(l=>({delta:s.delta+l.hz/400,area:s.h*l.weight,gamma:s.mult==='br s'?.06:.0017}));
+}
+// Zoom changes the displayed domain, never the signals contributing to the trace.
+function peakDomain(signal){
+ const half=signal.mult==='m'?.34:signal.mult==='br s'?.3:Math.max(.045,(signal.couplings||[]).reduce((sum,[n,j])=>sum+n*j/800,0)+.025);
+ return {lo:signal.delta-half,hi:signal.delta+half};
+}
+function spectrum(signals,{zoom='all',domain=null,integral=true,carbon=false}={}){
+ const W=900,H=275,L=46,R=20,T=43,B=223;
+ const full={lo:0,hi:carbon?225:Math.max(12.5,...signals.map(s=>s.delta+.5))};
+ const range=domain||(zoom!=='all'&&signals[Number(zoom)]?peakDomain(signals[Number(zoom)]):full);
+ const lo=Math.max(full.lo,range.lo),hi=Math.min(full.hi,range.hi),cropped=lo>full.lo||hi<full.hi;
+ const x=d=>L+(hi-d)/(hi-lo)*(W-L-R),precision=(hi-lo)<.05?3:2;
+ const lines=signals.flatMap(s=>carbon?[{delta:s.delta,area:1,gamma:.10}]:lineSignal(s));
+ const points=Array.from({length:1801},(_,i)=>hi-(hi-lo)*i/1800);
+ for(const l of lines)for(const k of [-30,-12,-6,-3,-2,-1,-.5,0,.5,1,2,3,6,12,30]){const d=l.delta+k*l.gamma;if(d>=lo&&d<=hi)points.push(d);}
+ points.sort((a,b)=>b-a);
+ const ys=points.map(d=>lines.reduce((sum,l)=>sum+l.area*l.gamma/(Math.PI*((d-l.delta)**2+l.gamma**2)),0));
+ const max=Math.max(...ys,1),path=points.map((d,i)=>`${i?'L':'M'}${x(d).toFixed(2)},${(B-ys[i]/max*(B-T)).toFixed(2)}`).join('');
+ let grid='';const ticks=cropped?Array.from({length:5},(_,i)=>lo+(hi-lo)*i/4):(carbon?Array.from({length:12},(_,i)=>i*20):Array.from({length:Math.floor(hi)+1},(_,i)=>i));
+ for(const d of ticks){grid+=`<line x1="${x(d)}" x2="${x(d)}" y1="${T}" y2="${B}" stroke="#eaf0f7"/><line x1="${x(d)}" x2="${x(d)}" y1="${B}" y2="${B+5}" stroke="#8b9aaf"/><text x="${x(d)}" y="${B+23}" text-anchor="middle" fill="#61718a" font-size="13">${cropped?d.toFixed(precision):d}</text>`;}
+ let intPath='';if(integral&&!carbon){
+  const areaAt=d=>lines.reduce((sum,l)=>sum+l.area*(.5-Math.atan((d-l.delta)/l.gamma)/Math.PI),0);
+  const start=areaAt(hi),visibleArea=Math.max(areaAt(lo)-start,1e-10);
+  intPath=`<path d="${points.map((d,i)=>`${i?'L':'M'}${x(d).toFixed(2)},${(90-(areaAt(d)-start)/visibleArea*55).toFixed(2)}`).join('')}" fill="none" stroke="#d7902b" stroke-width="1.8" opacity=".9"/>`;
+ }
+ const labels=signals.filter(s=>s.delta>=lo&&s.delta<=hi).map((s,i)=>`<text x="${x(s.delta)}" y="${carbon?T-12:18+(i%2)*14}" text-anchor="middle" fill="#2459d4" font-size="12" font-weight="600">${s.delta.toFixed(carbon?0:cropped?precision:1)}${carbon?'':` · ${s.h}H`}</text>`).join('');
+ return `<svg class="spectrum-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${carbon?'탄소':'수소'} NMR 학습용 모식 스펙트럼, ${hi.toFixed(precision)}에서 ${lo.toFixed(precision)} ppm. δ는 왼쪽에서 오른쪽으로 감소합니다. 수치 데이터는 아래 표에 있습니다.">${grid}<line x1="${L}" y1="${B}" x2="${W-R}" y2="${B}" stroke="#8191a9"/><path class="spectrum-trace" d="${path}" fill="none" stroke="#123c61" stroke-width="1.5" vector-effect="non-scaling-stroke"/>${intPath}${labels}<text x="${W/2}" y="269" text-anchor="middle" font-size="13" fill="#61718a">δ / ppm</text></svg>`;
+}
+const multName={s:'singlet',d:'doublet',t:'triplet',q:'quartet',quint:'quintet',sept:'septet',m:'multiplet',qd:'quartet of doublets',qt:'quartet of triplets',td:'triplet of doublets','br s':'broad singlet'};
+function signalTable(signals,reveal=false){return `<div class="table-scroll"><table class="signal-table"><thead><tr><th>δ / ppm</th><th>갈라짐</th><th>적분</th><th>J / Hz</th>${reveal?'<th>수소 배정</th>':''}</tr></thead><tbody>${[...signals].sort((a,b)=>b.delta-a.delta).map(s=>`<tr><td class="numeric">${s.delta.toFixed(1)}</td><td><abbr title="${multName[s.mult]||s.mult}">${s.mult}</abbr></td><td>${s.h}H</td><td class="numeric">${s.couplings.length?s.couplings.map(c=>c[1]).join(', '):'—'}</td>${reveal?`<td>${s.group?`<b style="color:${color(s.group)}">${esc(s.group)}</b> · `:''}${esc(s.site)}</td>`:''}</tr>`).join('')}</tbody></table></div>`;}
+const plotSpecs=new Map(),plotViews=new Map();
+let activePlot=null;
+function registerPlot(id,kind,data){
+ const signature=JSON.stringify([kind,data]),old=plotSpecs.get(id);
+ const edge=kind==='stick'?Math.max(12,...splitLines(data).map(l=>Math.abs(l.hz)))+5:0;
+ const full=kind==='stick'?{lo:-edge,hi:edge}:{lo:0,hi:Math.max(12.5,...data.map(s=>s.delta+.5))};
+ if(old?.signature!==signature)plotViews.set(id,{domain:null,peak:'all',integral:true});
+ plotSpecs.set(id,{id,kind,data,full,signature});
+}
+function clampDomain(domain,full,minSpan){
+ const span=Math.max(minSpan,Math.min(full.hi-full.lo,domain.hi-domain.lo));
+ const lo=Math.max(full.lo,Math.min(full.hi-span,(domain.hi+domain.lo-span)/2));
+ return {lo,hi:lo+span};
+}
+function plotState(id){const spec=plotSpecs.get(id),v=plotViews.get(id);if(!spec)return null;return{kind:spec.kind,domain:{...(v.domain||spec.full)},full:{...spec.full},peak:v.peak,integral:v.integral};}
+function changePlot(id,action,index){
+ const spec=plotSpecs.get(id),v=plotViews.get(id);if(!spec||!v)return;
+ const full=spec.full,d=v.domain||full,span=d.hi-d.lo,minSpan=spec.kind==='stick'?.5:.008;
+ if(action==='reset'){v.domain=null;v.peak='all';return;}
+ if(action==='peak'){
+  const i=Number(index);if(spec.kind!=='spectrum'||!Number.isInteger(i)||!spec.data[i])return;
+  v.domain=clampDomain(peakDomain(spec.data[i]),full,minSpan);v.peak=String(i);return;
+ }
+ if(!['in','out','left','right'].includes(action))return;
+ let center=(d.hi+d.lo)/2,width=span;
+ if(action==='in'){
+  // Keep a real signal in view when starting from a wide proton spectrum.
+  if(!v.domain&&spec.kind==='spectrum')center=spec.data[0].delta;
+  width=span/2;
+ }
+ if(action==='out')width=span*2;
+ if(action==='left')center+=span*.45;
+ if(action==='right')center-=span*.45;
+ v.domain=clampDomain({lo:center-width/2,hi:center+width/2},full,minSpan);v.peak='all';
+ if(Math.abs(v.domain.hi-v.domain.lo-(full.hi-full.lo))<1e-8)v.domain=null;
+}
+function stickSVG(couplings,domain){
+ const ls=splitLines(couplings),max=Math.max(...ls.map(l=>l.weight)),{lo,hi}=domain,x=h=>55+(hi-h)/(hi-lo)*640;
+ const visible=ls.filter(l=>l.hz>=lo&&l.hz<=hi);
+ return `<svg class="stick-svg" viewBox="0 0 750 205" role="img" aria-label="1차 갈라짐 모형, 전체 ${ls.length}개 선 중 현재 영역 ${visible.length}개 선. ${hi.toFixed(2)}에서 ${lo.toFixed(2)} Hz"><line x1="55" y1="158" x2="695" y2="158" stroke="#93a3b9"/>${visible.map(l=>`<line x1="${x(l.hz)}" y1="${158-l.weight/max*120}" x2="${x(l.hz)}" y2="158" stroke="#2459d4" stroke-width="2.5" vector-effect="non-scaling-stroke"/>`).join('')}${Array.from({length:5},(_,i)=>lo+(hi-lo)*i/4).map(h=>`<text x="${x(h)}" y="179" text-anchor="middle" font-size="13" fill="#61718a">${h.toFixed(hi-lo<5?2:1)}</text>`).join('')}${!visible.length?'<text x="375" y="85" text-anchor="middle" fill="#61718a" font-size="15">이 영역에는 선이 없습니다. 좌우 이동 또는 전체 보기를 선택하세요.</text>':''}<text x="375" y="201" text-anchor="middle" font-size="12" fill="#61718a">신호 중심에서의 상대 주파수 / Hz · 큰 δ ←</text></svg>`;
+}
+function plotContent(id,large=false){
+ const spec=plotSpecs.get(id),v=plotViews.get(id),d=v.domain||spec.full,isStick=spec.kind==='stick';
+ const span=d.hi-d.lo,fullSpan=spec.full.hi-spec.full.lo,minSpan=isStick?.5:.008;
+ const attr=action=>`data-plot="${id}" data-plot-action="${action}"`;
+ const controls=`<div class="zoom-controls" role="group" aria-label="피크 확대와 이동"><button ${attr('in')} ${span<=minSpan+1e-8?'disabled':''} aria-label="가로축 2배 확대">＋ 확대</button><button ${attr('out')} ${!v.domain?'disabled':''} aria-label="가로축 2배 축소">− 축소</button><button ${attr('left')} ${d.hi>=spec.full.hi-1e-8?'disabled':''} aria-label="왼쪽, 더 큰 ${isStick?'상대 주파수':'화학적 이동'}로 이동">←</button><button ${attr('right')} ${d.lo<=spec.full.lo+1e-8?'disabled':''} aria-label="오른쪽, 더 작은 ${isStick?'상대 주파수':'화학적 이동'}로 이동">→</button><button ${attr('reset')}>전체 보기</button></div>`;
+ const peakButtons=!isStick?`<div class="peak-picks"><span>신호별 확대</span><div>${[...spec.data.keys()].sort((a,b)=>spec.data[b].delta-spec.data[a].delta).map(i=>{const p=spec.data[i];return `<button ${attr('peak')} data-peak-index="${i}" aria-pressed="${v.peak===String(i)}" aria-label="${p.delta.toFixed(1)} ppm ${multName[p.mult]||p.mult} 신호 확대">${p.delta.toFixed(1)} <small>${p.mult} · ${p.h}H</small></button>`;}).join('')}</div></div>`:'';
+ return `<div class="spectrum-toolbar"><span class="instrument">${isStick?'갈라진 피크':'¹H NMR'} <small>${isStick?'1차 근사 · 상대 주파수':'400 MHz · 모식 데이터'}</small></span>${!large?`<button class="expand-plot" ${attr('expand')}>⛶ 큰 화면 보기</button>`:''}</div>${peakButtons}<div class="spectrum-chart">${isStick?stickSVG(spec.data,d):spectrum(spec.data,{domain:d,integral:v.integral})}</div>${controls}<div class="plot-bottom"><p class="plot-window" role="status" aria-live="polite">${isStick?'상대 주파수':'δ'} ${d.hi.toFixed(isStick?2:3)} → ${d.lo.toFixed(isStick?2:3)} ${isStick?'Hz':'ppm'} <b>· ${(fullSpan/span).toFixed(1)}배</b></p>${!isStick?`<label class="integral-toggle"><input type="checkbox" data-plot-integral="${id}" ${v.integral?'checked':''}> 적분 곡선</label>`:''}</div><p class="plot-help">${isStick?'확대 후 좌우로 이동하며 선 사이의 간격을 비교하세요. 세기비는 전체 패턴 기준입니다.':'신호를 선택해 갈라짐을 확대하세요. 왼쪽이 downfield입니다. 확대해도 인접 신호는 함께 표시됩니다.'}<span class="plot-scroll-hint"> 그래프가 화면보다 넓으면 좌우로 스크롤하세요.</span></p>`;
+}
+function plotViewer(id,kind,data){registerPlot(id,kind,data);return `<div class="peak-viewer" id="plot-${id}">${plotContent(id)}</div>`;}
+function refreshPlot(id){const host=$(`#plot-${id}`);if(host)host.innerHTML=plotContent(id);if(activePlot===id)$('#peak-dialog-body').innerHTML=plotContent(id,true);}
+function handlePlotClick(e,large=false){
+ const b=e.target.closest('button');if(!b||b.disabled||!b.dataset.plotAction)return false;
+ const id=b.dataset.plot,action=b.dataset.plotAction;
+ if(!plotSpecs.has(id))return true;
+ if(action==='expand'){activePlot=id;$('#peak-dialog-body').innerHTML=plotContent(id,true);$('#peak-dialog').showModal();$('#peak-close').focus();return true;}
+ changePlot(id,action,b.dataset.peakIndex);refreshPlot(id);
+ const selector=action==='peak'?`[data-peak-index="${b.dataset.peakIndex}"]`:`[data-plot-action="${action}"]`;
+ const replacement=$(`${large?'#peak-dialog-body':'#plot-'+id} ${selector}`);if(replacement&&!replacement.disabled)replacement.focus({preventScroll:true});
+ return true;
+}
+function handlePlotChange(e){const id=e.target.dataset.plotIntegral;if(!id||!plotViews.has(id))return false;plotViews.get(id).integral=e.target.checked;refreshPlot(id);const scope=activePlot===id?'#peak-dialog-body':'#plot-'+id;$(`${scope} [data-plot-integral]`)?.focus({preventScroll:true});return true;}
+function spectrumBlock(signals,reveal=false,id='question-spectrum'){return `<div class="spectrum-panel">${plotViewer(id,'spectrum',signals)}${signalTable(signals,reveal)}<p class="data-note">${signals.some(s=>s.mult==='m')?'방향족 m은 여러 환경의 겹침을 나타낸 모식 군집이며, 실제 고차 스핀 시뮬레이션이 아닙니다. ':'1차 근사의 선 모양입니다. '}표의 H 수는 전체 신호의 적분입니다. 확대 시 곡선 높이는 화면 내 면적에 맞춰 조정되며 피크 높이와 적분은 다릅니다.</p></div>`;}
+
+function sidePanel(){const tips={
+ eq:[['01','대칭부터 찾기','대칭 연산이나 빠른 분자 운동으로 서로 바뀌는 위치를 찾습니다.'],['02','CH₂는 한 번 더 보기','한 H씩 D로 바꾼 결과가 같은 분자면 homotopic, 거울상이면 enantiotopic, 부분입체이성질체면 diastereotopic입니다.'],['03','환경 수 ≠ 봉우리 수','갈라짐은 한 환경에서 여러 선을 만듭니다. 서로 다른 환경이 우연히 겹칠 수도 있습니다.']],
+ shifts:[['δ','구조를 먼저 읽기','H가 직접 붙은 원자와 옆 작용기를 구분합니다. O–H와 C–O–H의 탄소 수소는 다른 환경입니다.'],['←','큰 δ는 downfield','탈차폐된 수소가 보통 왼쪽에 나타납니다.'],['~','범위로 기억하기','ppm은 고정된 상수가 아닙니다. 용매·농도·온도와 구조의 영향을 받습니다.']],
+ compare:[['01','비교 기준 맞추기','같은 형태와 비슷한 측정 조건에서 비교합니다.'],['02','거리와 방향 보기','유도 효과는 거리에 따라 약해지고 π 결합의 비등방성은 공간 방향에 따라 달라집니다.'],['03','차이의 원인 말하기','O·N·할로젠의 영향인지, 고리 전류인지, 수소결합인지 설명해 보세요.']],
+ splitting:[['n+1','한 종류의 이웃','같은 J로 결합하는 n개의 spin-½ 핵, 1차 근사에서 n+1입니다.'],['×','서로 다른 J','두 집합이면 (nₐ+1)(nᵦ+1)의 전이가 생길 수 있습니다. 겹침으로 관찰 선 수는 줄어듭니다.'],['J','같은 δ와 같은 J','화학적 등가성과 자기적 등가성은 구별합니다. 강결합·방향족 고차 패턴에 단순 규칙을 그대로 적용하지 않습니다.']],
+ matching:[['01','적분으로 조각 만들기','3H:2H 에틸, 6H:1H 아이소프로필, 9H tert-부틸을 탐색합니다.'],['02','δ로 연결 위치 찾기','OCH₂와 COCH₂는 적분과 갈라짐이 같아도 이동 영역이 다릅니다.'],['03','모든 신호 검산하기','맞는 단서 하나만 찾지 말고 빠진 H나 설명되지 않는 피크가 없는지 확인합니다.']],
+ integrated:[['01','분자식부터 확인하기','원소의 종류와 수소 수를 확인하고 후보 구조의 분자식과 비교합니다.'],['IR','작용기 후보 좁히기','C=O, 넓은 O–H, C≡N의 유무를 비교합니다.'],['NMR','연결 구조 검증하기','이동·적분·갈라짐이 분자식과 동시에 맞아야 합니다.']],
+ carbon:[['¹³C','¹H 광대역 탈결합','일반적인 ¹³C{¹H}에서는 C–H 갈라짐이 제거됩니다. 수소 n+1 규칙으로 읽지 않습니다.'],['δ','신호 수는 환경 수','대칭으로 같은 탄소는 같은 신호입니다.'],['≠','높이는 탄소 개수가 아님','NOE와 이완의 차이 때문에 통상의 ¹³C 신호 세기를 직접 정량 적분하지 않습니다.']]
+};return `<aside class="learning-aside"><div class="concept-card"><p class="eyebrow">THINKING GUIDE</p><h3>이렇게 접근해 보세요</h3>${tips[state.module].map(t=>`<div class="tip"><span>${t[0]}</span><div><h4>${t[1]}</h4><p>${t[2]}</p></div></div>`).join('')}</div><div class="note-card"><span class="note-symbol">↳</span><h3>측정 조건도 구조의 단서</h3><p>별도 표시가 없으면 비키랄 용매·상온을 가정합니다. OH/NH 신호의 위치와 갈라짐은 교환 속도에 민감합니다.</p></div><div class="session-card"><span>이번 학습</span><strong>${Object.values(state.firstAnswers).filter(a=>a.correct).length}<small> / ${Object.keys(state.firstAnswers).length} 정답</small></strong><p>문제별 첫 제출 기준 · 새로고침하면 초기화</p></div></aside>`;}
+function heading(){const m=modules.find(m=>m.id===state.module),idx=modules.indexOf(m);return `<div class="page-heading"><div><p class="eyebrow">${String(idx+1).padStart(2,'0')} / ${m.en}</p><h1>${m.heading}</h1><p>${m.desc}</p></div><div class="module-count"><strong>${state.module==='carbon'?D.carbonRanges.length:state.module==='shifts'&&state.view==='reference'?D.protonRanges.length:getPool().length}</strong><span>${state.module==='carbon'||state.module==='shifts'&&state.view==='reference'?'가지 환경':'개의 연습문제'}</span></div></div>`;}
+function nav(){ $('#module-nav').innerHTML=modules.map((m,i)=>`<button class="nav-item ${m.id===state.module?'active':''}" data-module="${m.id}" ${m.id===state.module?'aria-current="page"':''}><span class="nav-number">${String(i+1).padStart(2,'0')}</span><span>${m.label}</span></button>`).join('');}
+function tabbar(){
+ if(state.module==='shifts'){
+  const views=[
+   {view:'reference',label:'화학적 이동',detail:'수소 유형별 표 · 분자 예제',icon:'<path d="M3 19h18M3 15h3l2-6 2 6h3l2-11 2 11h4"/>'},
+   {view:'quiz',label:'연습문제',detail:'구조를 보고 화학적 이동 찾기',icon:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2h6v2M9 9h6M9 13h6M9 17h3"/>'}
+  ];
+  return `<div class="shift-menu" role="group" aria-label="¹H 화학적 이동 학습 메뉴">${views.map(v=>`<button type="button" data-view="${v.view}" class="shift-menu-button ${state.view===v.view?'active':''}" aria-pressed="${state.view===v.view}"><span class="shift-menu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${v.icon}</svg></span><span class="shift-menu-copy"><strong>${v.label}</strong><span>${v.detail}</span></span></button>`).join('')}</div>`;
+ }
+ const views=state.module==='splitting'?[['quiz','패턴 퀴즈'],['lab','갈라짐 실험실']]:[];
+ return views.length?`<div class="view-tabs" role="group" aria-label="학습 방식">${views.map(([view,label])=>`<button data-view="${view}" class="${state.view===view?'active':''}" aria-pressed="${state.view===view}">${label}</button>`).join('')}</div>`:'';
+}
+function render(){
+ const referenceScroll=$('.proton-range-scroll')?.scrollTop||0,referenceScrollLeft=$('.proton-range-scroll')?.scrollLeft||0;
+ nav();
+ const shiftInfo=state.module==='shifts'&&state.view==='reference';
+ $('#content').innerHTML=heading()+tabbar()+(shiftInfo?`<div class="shift-reference-view">${protonReference()}${protonExample()}</div>`:`<div class="learning-layout"><div class="primary-column">${state.module==='carbon'?reference(true):state.view==='lab'?lab():quiz()}</div>${sidePanel()}</div>`);
+ if(shiftInfo&&$('.proton-range-scroll')){ $('.proton-range-scroll').scrollTop=referenceScroll;$('.proton-range-scroll').scrollLeft=referenceScrollLeft; }
+}
+function quiz(){const q=question(),idx=state.cursor[state.module]||0,pool=getPool(),a=state.answers[q.id];
+ const content=state.module==='compare'?`<div class="comparison-grid">${q.pair.map((p,i)=>`<div class="comparison-molecule"><div class="pair-label">${i?'B':'A'} <span>${esc(p.label)}</span></div>${molecule(p.molecule,{target:p.target,compact:true})}${a?`<strong class="pair-delta">≈ ${p.delta.toFixed(1)} <small>ppm</small></strong>`:''}</div>`).join('')}</div>`:q.structureOptions?spectrumBlock(D.molecules[q.molecule].signals,!!a):molecule(q.molecule,{target:q.target??null,reveal:!!a});
+ const choices=q.options.map((o,i)=>`<button class="choice ${state.selected===i?'selected':''} ${a&&i===q.answer?'correct':''} ${a&&a.selected===i&&!a.correct?'incorrect':''}" data-choice="${i}" role="radio" aria-checked="${state.selected===i}" ${a?'disabled':''}><span class="choice-letter">${String.fromCharCode(65+i)}</span>${q.structureOptions?`<span class="structure-choice">${molecule(q.structureOptions[i],{compact:true})}</span>`:`<span>${esc(o)}</span>`}${a&&i===q.answer?'<span class="choice-state">정답</span>':''}</button>`).join('');
+ return `<div class="problem-toolbar"><label>문제 <select id="question-select" aria-label="문제 선택">${pool.map((p,i)=>`<option value="${i}" ${i===idx?'selected':''}>${String(i+1).padStart(2,'0')} · ${p.level}${state.module==='eq'?' · '+esc(D.molecules[p.molecule].name):p.category?' · '+p.category:''}${state.answers[p.id]?' · 풀이 완료':''}</option>`).join('')}</select></label><div><button class="icon-button" data-action="random" aria-label="다른 문제 무작위 선택">⤨ <span>무작위</span></button><button class="icon-button" data-action="previous" ${idx===0?'disabled':''} aria-label="이전 문제">←</button><button class="icon-button" data-action="next" ${idx===pool.length-1?'disabled':''} aria-label="다음 문제">→</button></div></div><section class="question-card"><div class="question-heading"><span class="badge">${q.level}</span><span>${q.category||'PRACTICE'} <b class="question-number">${String(idx+1).padStart(2,'0')} / ${pool.length}</b></span></div><h2>${q.title}</h2><p class="question-prompt">${q.prompt}</p>${state.module==='integrated'?clues(q,!!a):''}${content}${q.targetName?`<p class="target-caption"><span class="target-key"></span>관찰할 위치: <b>${esc(q.targetName)}</b></p>`:''}${D.molecules[q.molecule]?.stereo?`<p class="data-note">${esc(D.molecules[q.molecule].stereo)}</p>`:''}${state.module==='splitting'?`<div class="coupling-chips">${q.couplings.length?q.couplings.map(([n,j],i)=>`<span>이웃 ${i?'B':'A'} <b>${n}H</b> · J = ${j} Hz</span>`).join(''):'유효 이웃 H = 0'}</div>`:''}<fieldset class="answer-fieldset"><legend>정답을 선택하세요</legend><div class="choices ${q.structureOptions?'structure-choices':''}" role="radiogroup" aria-label="답안 보기">${choices}</div></fieldset>${!a?`<div class="answer-actions"><button class="text-button" data-action="hint">${state.hints.has(q.id)?'힌트 접기':'힌트 보기'}</button><button class="primary-button" data-action="submit" ${state.selected===null?'disabled':''}>정답 확인 <span>↗</span></button></div>`:''}${state.hints.has(q.id)&&!a?`<p class="hint-box">${q.hint}</p>`:''}${a?feedback(q,a):''}</section>`;
+}
+function clues(q,reveal){return `<div class="clue-grid"><div class="formula-card"><span>분자식</span><strong>${formula(q.formula)}</strong></div><div class="ir-card"><span class="small-heading">IR 주요 피크 · cm⁻¹</span><table><thead><tr><th>파수</th><th>관찰</th>${reveal?'<th>배정</th>':''}</tr></thead><tbody>${q.ir.map(r=>`<tr><td class="numeric">${r[0]}</td><td>${r[1]}</td>${reveal?`<td>${r[2]}</td>`:''}</tr>`).join('')}</tbody></table></div></div>`;}
+function feedback(q,a){let detail='';
+ if(q.structureOptions){const m=D.molecules[q.molecule];detail=`<div class="explanation-steps"><div><span>01</span><h4>화학적 등가성</h4><p>${m.equivalence}</p></div><div><span>02</span><h4>화학적 이동</h4><p>${m.signals.map(s=>`${s.delta.toFixed(1)} ppm → ${s.site}`).join(' / ')}. δ는 각 환경의 대표 모형 값입니다.</p></div><div><span>03</span><h4>갈라짐</h4><p>${m.signals.map(s=>`${s.site}: ${multName[s.mult]||s.mult}${s.couplings.length?' ['+s.couplings.map(([n,j])=>`${n}H, J=${j} Hz`).join('; ')+']':''}`).join(' / ')}. OH의 결합은 빠른 교환으로 무시했습니다.</p></div><div><span>04</span><h4>적분 검산</h4><p>${m.signals.map(s=>s.h+'H').join(' + ')} = ${m.signals.reduce((x,s)=>x+s.h,0)}H. ${formula(m.formula)}의 전체 수소 수와 일치합니다.</p></div></div>${q.elimination?`<div class="elimination"><h4>다른 구조는 왜 맞지 않을까요?</h4><p>${q.elimination}</p></div>`:''}<details class="assigned-structure"><summary>정답 구조의 수소 환경 보기</summary>${molecule(q.molecule,{reveal:true})}<p class="data-note">같은 문자는 같은 화학적 환경입니다. 방향족 고리의 여러 환경은 스펙트럼에서 겹칠 수 있습니다.</p></details>`;
+ }else if(state.module==='eq'){detail=`<div class="equivalence-legend"><b>색과 문자 = 수소 환경</b><p>같은 문자는 등가인 수소를 표시합니다. A/B처럼 나뉜 표기는 해당 부분에 서로 다른 환경이 있다는 뜻입니다.</p></div>`;}
+ else if(state.module==='splitting'){detail=`<div class="splitting-answer">${stickPlot(q.couplings)}<button data-action="open-lab">이 조건으로 갈라짐 실험하기 →</button></div>`;}
+ return `<div class="feedback ${a.correct?'is-correct':'is-incorrect'}" role="status"><div class="feedback-title"><span>${a.correct?'✓':'↺'}</span><div><strong>${a.correct?'정답입니다.':'근거를 함께 확인해 보세요.'}</strong><p>정답 ${String.fromCharCode(65+q.answer)} · ${esc(q.options[q.answer])}</p></div></div><p class="main-explanation">${q.explanation}</p>${detail}<div class="review-actions"><button data-action="retry">다시 풀기</button><button class="primary-button" data-action="next" ${(state.cursor[state.module]||0)===getPool().length-1?'disabled':''}>다음 문제 →</button></div></div>`;
+}
+function stickPlot(couplings,id='splitting-answer'){
+ const ls=splitLines(couplings),minWeight=Math.min(...ls.map(l=>l.weight));
+ return `<div class="stick-result"><div class="result-metrics"><span>전체 패턴의 선 <b>${ls.length}</b></span><span>세기비 <strong>${ls.length<=16?ls.map(l=>Number((l.weight/minWeight).toFixed(2))).join(':'):'선별 상대 세기'}</strong></span></div>${plotViewer(id,'stick',couplings)}</div>`;
+}
+function lab(){const l=state.lab;return `<section class="question-card lab-card"><div class="question-heading"><span class="badge">INTERACTIVE</span><span>1차 갈라짐 모형</span></div><h2>같은 J라면, 다른 이웃의 선도 겹칩니다.</h2><p class="question-prompt">관찰할 수소 한 환경에 결합하는 이웃 A와 B를 설정하세요. 실제 분자의 정확한 예측이 아닌 원리 학습 모형입니다.</p><div class="lab-presets"><button data-preset="one">한쪽 2H</button><button data-preset="same">양쪽 등가 6H</button><button data-preset="different">다른 J · 3H + 2H</button><button data-preset="equalj">같은 J · 3H + 2H</button></div><div class="lab-controls">${['A','B'].map(c=>`<div class="neighbor-card"><span class="neighbor-name">이웃 ${c}</span><label>수소 개수 <select data-lab="n${c}" aria-label="이웃 ${c} 수소 개수">${Array.from({length:7},(_,n)=>`<option value="${n}" ${l['n'+c]===n?'selected':''}>${n}H</option>`).join('')}</select></label><label>J <output id="j${c}-output">${l['j'+c].toFixed(1)}</output> Hz<input type="range" min="0.5" max="18" step="0.5" data-lab="j${c}" value="${l['j'+c]}" aria-label="이웃 ${c} J 결합상수"></label></div>`).join('')}</div><div id="lab-plot">${stickPlot([[l.nA,l.jA],[l.nB,l.jB]],'splitting-lab')}</div><p class="principle-box">두 집합의 최대 전이 수는 (${l.nA}+1) × (${l.nB}+1) = <b>${(l.nA+1)*(l.nB+1)}</b>입니다. 같은 주파수의 전이는 합쳐 표시합니다. 실제로는 유한한 선폭 때문에 가까운 선도 분리되지 않을 수 있습니다.</p></section>`;}
+
+function protonReference(){
+ const r=D.protonRanges[state.range],max=13;
+ const ticks=[13,10,8,6,4,2,0].map(n=>`<span style="left:${(max-n)/max*100}%">${n}</span>`).join('');
+ return `<section class="reference-card proton-reference" aria-labelledby="proton-reference-title"><div class="reference-top"><span class="badge">¹H SHIFT TABLE</span><span>${D.protonRanges.length}가지 수소 환경</span></div><h2 id="proton-reference-title">수소 유형별 화학적 이동</h2><p class="reference-intro">수소 유형을 선택하면 표 아래에서 구조와 해당 위치를 확인할 수 있습니다. 막대는 각 유형의 대표 이동 범위입니다.</p><p class="proton-table-hint" id="proton-table-hint">표를 좌우로 밀어 이동 범위와 ppm 값을 확인하세요.</p><div class="table-scroll proton-range-scroll" tabindex="0" aria-label="수소 화학적 이동 참고표"><table class="proton-range-table"><thead><tr><th scope="col">수소 유형</th><th scope="col">대표 구조</th><th scope="col" class="proton-map-column"><div class="proton-map-direction"><span>Downfield</span><span>Upfield</span></div><div class="proton-map-axis" aria-label="왼쪽 13에서 오른쪽 0 ppm으로 감소">${ticks}</div></th><th scope="col">δ / ppm</th></tr></thead><tbody>${D.protonRanges.map((p,i)=>`<tr class="${state.range===i?'active':''}"><th scope="row"><button type="button" data-range="${i}" aria-pressed="${state.range===i}" aria-controls="proton-range-detail">${p.name}</button></th><td class="proton-fragment">${p.fragment}</td><td class="proton-map-column"><span class="proton-map-track" aria-hidden="true"><span class="proton-map-band" style="left:${(max-p.max)/max*100}%;width:${(p.max-p.min)/max*100}%"></span></span></td><td class="numeric">${p.min.toFixed(1)}–${p.max.toFixed(1)}</td></tr>`).join('')}</tbody></table></div><div class="proton-range-detail" id="proton-range-detail"><div><p class="eyebrow">구조에서 위치 확인</p><h3>${r.name} <span>${r.min.toFixed(1)}–${r.max.toFixed(1)} ppm</span></h3><p>${r.note}</p></div>${molecule(r.molecule,{target:r.target,compact:true})}</div><p class="data-note">대표 범위는 서로 겹칠 수 있으며, 용매·농도·온도·치환기에 따라 달라집니다. 교환성 OH/NH는 특히 조건에 민감합니다. 파란색은 관찰할 수소가 있는 위치입니다.</p></section>`;
+}
+function protonExample(){
+ const e=D.protonExamples[state.protonExample],m=D.molecules[e.molecule],signal=m.signals[state.protonSignal];
+ return `<section class="question-card proton-example"><div class="section-title"><h2>분자에서 확인하기</h2><select id="proton-example" aria-label="수소 NMR 예제 분자">${D.protonExamples.map((p,i)=>`<option value="${i}" ${i===state.protonExample?'selected':''}>${D.molecules[p.molecule].name}</option>`).join('')}</select></div><p class="reference-intro">수소 환경의 문자와 표의 배정을 연결해 보세요. 아래 값은 학습용 대표값입니다.</p><label class="proton-site-select">관찰할 수소 <select id="proton-signal" aria-label="분자에서 강조할 수소 환경">${m.signals.map((p,i)=>`<option value="${i}" ${state.protonSignal===i?'selected':''}>${p.group} · ${p.site} · ${p.delta.toFixed(1)} ppm</option>`).join('')}</select></label>${molecule(e.molecule,{reveal:true,targetGroup:signal.group,compact:true})}<p class="proton-assignment"><b>${signal.group} · ${esc(signal.site)}</b><span>${signal.delta.toFixed(1)} ppm · ${signal.h}H · ${multName[signal.mult]||signal.mult}</span></p><p class="example-note">${e.note}</p>${spectrumBlock(m.signals,true,'proton-example-spectrum')}</section>`;
+}
+
+function reference(carbon){const ranges=carbon?D.carbonRanges:D.protonRanges,r=ranges[Math.min(state.range,ranges.length-1)],max=carbon?225:13;return `<section class="reference-card"><div class="reference-top"><span class="badge">${carbon?'¹³C':'¹H'} SHIFT MAP</span><span>대표 범위 · δ / ppm</span></div><p class="reference-intro">환경을 선택하면 구조의 해당 위치와 해석 포인트를 확인할 수 있습니다.</p><div class="range-axis"><span>${max} ppm · Downfield</span><span>Upfield · 0</span></div><div class="range-map">${ranges.map((p,i)=>`<button class="range-row ${i===state.range?'active':''}" data-range="${i}" aria-pressed="${i===state.range}"><span class="range-name">${p.name}</span><span class="range-track"><span class="range-band" style="left:${(max-p.max)/max*100}%;width:${(p.max-p.min)/max*100}%"></span></span><span class="range-value">${carbon?p.min:p.min.toFixed(1)}–${carbon?p.max:p.max.toFixed(1)}</span></button>`).join('')}</div><div class="range-detail"><div><p class="eyebrow">SELECTED ENVIRONMENT</p><h2>${r.name}</h2><div class="range-big">${r.min}–${r.max}<small> ppm</small></div><p class="fragment">${r.fragment}</p><p>${r.note}</p></div>${molecule(r.molecule,{target:r.target,compact:true})}</div><p class="data-note">이 범위는 전형적인 유기 분자의 학습 기준이며 경계가 절대적이지 않습니다. 치환기·용매·온도에 따라 달라지고 범위끼리 겹칩니다. 강조는 해당 원자 또는 원자단의 위치를 표시합니다.</p></section>${carbon?carbonExample():''}`;}
+function carbonExample(){const e=D.carbonExamples[state.carbonExample],s=e.peaks.map(p=>({delta:p.delta,h:1,mult:'s',couplings:[]}));return `<section class="question-card carbon-example"><div class="section-title"><h2>분자에서 확인하기</h2><select id="carbon-example" aria-label="탄소 NMR 예제 분자">${D.carbonExamples.map((c,i)=>`<option value="${i}" ${i===state.carbonExample?'selected':''}>${D.molecules[c.molecule].name}</option>`).join('')}</select></div><div class="carbon-summary">${molecule(e.molecule,{compact:true})}<div><span class="badge">${e.peaks.length}개의 탄소 환경</span><p>${e.note}</p></div></div>${spectrum(s,{carbon:true,integral:false})}<div class="table-scroll"><table><thead><tr><th>δ / ppm</th><th>탄소 배정</th><th>등가 탄소 수</th></tr></thead><tbody>${[...e.peaks].sort((a,b)=>b.delta-a.delta).map(p=>`<tr><td>${p.delta}</td><td>${p.site}</td><td>${p.n}C</td></tr>`).join('')}</tbody></table></div><p class="data-note">광대역 ¹H 탈결합 모식 스펙트럼. 각 선의 높이는 설명용으로 같게 표시했으며, 탄소 개수의 정량적 적분값이 아닙니다.</p></section>`;}
+
+function selectModule(id,view=id==='shifts'?'reference':'quiz'){if(!modules.some(m=>m.id===id))throw Error('Unknown module');state.module=id;state.view=view;state.selected=state.answers[question()?.id]?.selected??null;state.range=0;render();}
+function go(index){const pool=getPool();if(!Number.isInteger(index)||index<0||index>=pool.length)throw Error('Invalid question index');state.cursor[state.module]=index;state.selected=state.answers[question().id]?.selected??null;render();}
+function choose(index){const q=question();if(!q||!Number.isInteger(index)||index<0||index>=q.options.length)throw Error('Invalid answer option');if(state.answers[q.id])throw Error('Question already submitted');state.selected=index;render();$(`[data-choice="${index}"]`)?.focus({preventScroll:true});}
+function submit(){const q=question();if(state.selected===null)throw Error('Select an answer first');if(state.answers[q.id])throw Error('Question already submitted');state.answers[q.id]={selected:state.selected,correct:state.selected===q.answer};if(!state.firstAnswers[q.id])state.firstAnswers[q.id]={...state.answers[q.id]};render();$('.feedback')?.scrollIntoView({behavior:'smooth',block:'nearest'});return{correct:state.answers[q.id].correct,correctOption:q.answer+1,explanation:q.explanation};}
+$('#module-nav').addEventListener('click',e=>{const b=e.target.closest('[data-module]');if(b){selectModule(b.dataset.module);$('#main').focus({preventScroll:true});}});
+$('#content').addEventListener('click',e=>{
+ if(handlePlotClick(e))return;
+ const b=e.target.closest('button');if(!b||b.disabled)return;
+ if(b.dataset.choice!==undefined){choose(Number(b.dataset.choice));return;}
+ if(b.dataset.view&&((state.module==='shifts'&&['quiz','reference'].includes(b.dataset.view))||(state.module==='splitting'&&['quiz','lab'].includes(b.dataset.view)))){state.view=b.dataset.view;render();$(`[data-view="${state.view}"]`)?.focus({preventScroll:true});return;}
+ if(b.dataset.range!==undefined){state.range=Number(b.dataset.range);render();$(`[data-range="${state.range}"]`)?.focus({preventScroll:true});return;}
+ if(b.dataset.preset){const presets={one:[2,0,7,5],same:[6,0,7,5],different:[3,2,8,5],equalj:[3,2,7,7]};const[nA,nB,jA,jB]=presets[b.dataset.preset];state.lab={nA,nB,jA,jB};render();return;}
+ const action=b.dataset.action,q=question(),idx=state.cursor[state.module]||0;
+ if(action==='next'&&idx<getPool().length-1)go(idx+1);
+ if(action==='previous'&&idx>0)go(idx-1);
+ if(action==='random'){const n=getPool().length;go((idx+1+Math.floor(Math.random()*(n-1)))%n);}
+ if(action==='hint'){state.hints.has(q.id)?state.hints.delete(q.id):state.hints.add(q.id);render();}
+ if(action==='submit')submit();
+ if(action==='retry'){delete state.answers[q.id];state.selected=null;render();}
+ if(action==='open-lab'){state.lab={nA:q.couplings[0]?.[0]||0,jA:q.couplings[0]?.[1]||7,nB:q.couplings[1]?.[0]||0,jB:q.couplings[1]?.[1]||5};state.view='lab';render();}
+});
+$('#content').addEventListener('keydown',e=>{const b=e.target.closest('[data-choice]');if(!b||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)||state.answers[question()?.id])return;e.preventDefault();const d=e.key==='ArrowRight'||e.key==='ArrowDown'?1:-1;const n=question().options.length,i=(Number(b.dataset.choice)+d+n)%n;choose(i);$(`[data-choice="${i}"]`).focus();});
+$('#content').addEventListener('change',e=>{
+ if(handlePlotChange(e))return;
+ const t=e.target;
+ if(t.id==='question-select')go(Number(t.value));
+ if(t.id==='carbon-example'){state.carbonExample=Number(t.value);render();$('#carbon-example').focus({preventScroll:true});}
+ if(t.id==='proton-example'){state.protonExample=Number(t.value);state.protonSignal=0;render();$('#proton-example').focus({preventScroll:true});}
+ if(t.id==='proton-signal'){state.protonSignal=Number(t.value);render();$('#proton-signal').focus({preventScroll:true});}
+ if(t.dataset.lab?.startsWith('n')){state.lab[t.dataset.lab]=Number(t.value);render();$(`[data-lab="${t.dataset.lab}"]`).focus({preventScroll:true});}
+});
+$('#content').addEventListener('input',e=>{const k=e.target.dataset.lab;if(k?.startsWith('j')){state.lab[k]=Number(e.target.value);$(`#${k}-output`).textContent=state.lab[k].toFixed(1);const l=state.lab;$('#lab-plot').innerHTML=stickPlot([[l.nA,l.jA],[l.nB,l.jB]],'splitting-lab');}});
+const peakDialog=$('#peak-dialog');
+$('#peak-dialog-body').addEventListener('click',e=>handlePlotClick(e,true));
+$('#peak-dialog-body').addEventListener('change',handlePlotChange);
+$('#peak-close').addEventListener('click',()=>peakDialog.close());
+peakDialog.addEventListener('close',()=>{const id=activePlot;activePlot=null;if(id)$(`#plot-${id} [data-plot-action="expand"]`)?.focus({preventScroll:true});});
+const dialog=$('#sources-dialog');$('#sources-toggle').addEventListener('click',()=>dialog.showModal());$('#sources-close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
+$('#sources-content').innerHTML=`<p>문제와 해설은 이 수업용 사이트를 위해 작성한 학습 자료입니다. 아래 자료의 원리와 대표 범위를 참고했습니다.</p><div class="source-assumptions"><h3>데이터를 읽는 기준</h3><ul><li>모든 스펙트럼과 개별 δ·J·IR 값은 학습용 모식 데이터이며 실제 시료의 측정 기록이 아닙니다.</li><li>수소 스펙트럼은 400 MHz, TMS=0 ppm, 1차 근사입니다. 용매·불순물·¹³C 위성 피크는 생략했습니다.</li><li>비키랄 용매에서 enantiotopic H는 등가입니다. Diastereotopic H는 일반적으로 비등가이며 우연한 δ 일치는 별개입니다.</li><li>OH/NH는 빠른 교환을 기본 가정합니다. 강결합과 방향족 고차 패턴은 정밀 모사하지 않습니다.</li><li>¹³C{¹H}는 수소 광대역 탈결합 조건입니다. 일반적인 신호 높이는 탄소 수와 비례하지 않습니다.</li></ul></div>${D.sources.map(s=>`<div class="source-item"><a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.title} ↗</a><p>${s.detail}</p></div>`).join('')}<p class="data-note">John McMurry, Organic Chemistry, OpenStax (2023). 구조 그림과 연습 문제는 새로 작성했으며 원문 문제나 스펙트럼 이미지를 복제하지 않았습니다.</p>`;
+
+function readState(){if(state.module==='carbon'||state.module==='shifts'&&state.view==='reference'){const r=(state.module==='carbon'?D.carbonRanges:D.protonRanges)[state.range];return{module:state.module,view:'reference',selectedEnvironment:r.name,range:[r.min,r.max],unit:'ppm'};}if(state.view==='lab')return{module:state.module,view:'lab',...state.lab,lineCount:splitLines([[state.lab.nA,state.lab.jA],[state.lab.nB,state.lab.jB]]).length};const q=question();return{module:state.module,view:state.view,questionNumber:(state.cursor[state.module]||0)+1,total:getPool().length,prompt:q?.title,options:q?.options,selectedOption:state.selected===null?null:state.selected+1,submitted:!!state.answers[q?.id],correct:state.answers[q?.id]?.correct};}
+window.NMR_APP={splitLines,binomial,spectrum,molecule,readState,modules,plotState,peakDomain};
+if(document.modelContext?.registerTool){const lifecycle=new AbortController();const tools=[
+{name:'read_nmr_exercise',title:'현재 NMR 문제 읽기',description:'Read the current exercise and selected answer without revealing an unsubmitted solution.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true,untrustedContentHint:false},execute:()=>readState()},
+{name:'open_nmr_exercise',title:'NMR 연습 영역 열기',description:'Navigate to a learning module and an optional one-based exercise number.',inputSchema:{type:'object',properties:{module:{type:'string',enum:modules.map(m=>m.id)},questionNumber:{type:'integer',minimum:1}},required:['module'],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},execute:input=>{if(!input||!modules.some(m=>m.id===input.module))throw Error('Invalid module');const n=input.questionNumber??1;if(input.module==='carbon'&&n!==1)throw Error('Carbon is a reference module');if(input.module!=='carbon'&&(!Number.isInteger(n)||n<1||n>D[input.module].length))throw Error('Invalid question number');selectModule(input.module,'quiz');if(input.module!=='carbon')go(n-1);return readState();}},
+{name:'submit_nmr_answer',title:'NMR 답안 제출',description:'Select and submit an answer to the visible quiz. This records a result and reveals its explanation.',inputSchema:{type:'object',properties:{option:{type:'integer',minimum:1,maximum:4}},required:['option'],additionalProperties:false},annotations:{readOnlyHint:false,untrustedContentHint:false},execute:input=>{if(state.view!=='quiz'||state.module==='carbon'||!input||!Number.isInteger(input.option))throw Error('No quiz or invalid option');choose(input.option-1);return submit();}}
+];for(const tool of tools){try{Promise.resolve(document.modelContext.registerTool(tool,{signal:lifecycle.signal})).catch(()=>{});}catch{}}window.addEventListener('pagehide',()=>lifecycle.abort(),{once:true});}
+render();
+})();
+
+</script>
+</body></html>
